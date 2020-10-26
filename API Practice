@@ -1,0 +1,75 @@
+#repl link: https://repl.it/join/kaskuoyg-gayan_athukoral
+import requests
+api_key = ('?apiKey=782bba4ef5fd462d81b2102ebb96fe55')
+
+#search recipe
+food = str(input('what u wanna eat?: '))
+print('')
+request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
+request_search_recipe_json=request_search_recipe.json()
+print(request_search_recipe_json)
+
+for i in request_search_recipe_json['results']:
+  print(i['title'])
+  print(i['id'])
+  print('')
+
+#get recipe instructions/info
+input_id = str(input('what is the id of the recipe you want?: '))
+
+print('')
+recipe_instructions = requests.get('https://api.spoonacular.com/recipes/'+ input_id+'/analyzedInstructions' + api_key)
+
+recipe_instructions_json=recipe_instructions.json()
+
+print(recipe_instructions_json)
+
+for i in recipe_instructions_json:
+  for n in i['steps']:
+    #Step Number
+    print('Step Number: ' + str(n['number']))
+    #Ingredients
+    display_header = True
+    for x in n['ingredients']:
+      while display_header == True:
+        print('Ingredients List:')
+        display_header = False
+      print(x['localizedName'])
+    #Equipment
+    for y in n['equipment']:
+      print('Equipment: ' + y['localizedName'])
+    #Instructions
+    print('Instructions: ' + n['step'])
+    print('')
+
+#get recipe nutrition calorie stuff
+'''
+recipe_nutrition = requests.get('https://api.spoonacular.com/recipes/1003464/nutritionWidget.json' + api_key)
+
+recipe_nutrition_json = recipe_nutrition.json()
+calories = recipe_nutrition_json['calories']
+
+recipe_info = requests.get('https://api.spoonacular.com/recipes/1003464/information?apiKey=782bba4ef5fd462d81b2102ebb96fe55&includeNutrition=false')
+
+recipe_info_json = recipe_info.json()
+servings = recipe_info_json['servings']
+
+print(calories)
+print(servings)
+
+total_calories = input(str('how many cal u eat: '))
+
+serving= float(total_calories)*(float(servings)/float(calories))
+'''
+#adjust amount of ingredient to match desired calorie size
+ingredients_info = requests.get('https://api.spoonacular.com/recipes/1003464/ingredientWidget.json'+api_key)
+
+ingredients_info_json = ingredients_info.json()
+print(ingredients_info_json)
+for i in ingredients_info_json['ingredients']:
+  print(i['name'])
+  print(i['amount'])
+  print(i['metric'])
+
+
+
