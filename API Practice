@@ -43,7 +43,7 @@ for i in recipe_instructions_json:
     print('')
 
 #get recipe nutrition calorie stuff
-'''
+
 recipe_nutrition = requests.get('https://api.spoonacular.com/recipes/1003464/nutritionWidget.json' + api_key)
 
 recipe_nutrition_json = recipe_nutrition.json()
@@ -54,22 +54,26 @@ recipe_info = requests.get('https://api.spoonacular.com/recipes/1003464/informat
 recipe_info_json = recipe_info.json()
 servings = recipe_info_json['servings']
 
-print(calories)
-print(servings)
-
 total_calories = input(str('how many cal u eat: '))
 
-serving= float(total_calories)*(float(servings)/float(calories))
-'''
+calorie_adjustment_ratio = float(total_calories)/float(calories)
+adjusted_servings= round(float(total_calories)*(float(servings)/float(calories)),0)
+print('This will create about ' + str(adjusted_servings) + ' serving(s) from this meal')
+print('')
 #adjust amount of ingredient to match desired calorie size
 ingredients_info = requests.get('https://api.spoonacular.com/recipes/1003464/ingredientWidget.json'+api_key)
 
 ingredients_info_json = ingredients_info.json()
-print(ingredients_info_json)
+#print(ingredients_info_json)
 for i in ingredients_info_json['ingredients']:
   print(i['name'])
-  print(i['amount'])
-  print(i['metric'])
+  (i['amount']).popitem()
+  for j in ((i['amount']).values()):
+    print(j['value'])
+    adjusted_value = (j['value'])*calorie_adjustment_ratio
+    round(adjusted_value,2)
+    print(str(adjusted_value) + ' ' + str(j['unit']))
+    print('')
 
 
 
