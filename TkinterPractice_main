@@ -9,9 +9,10 @@ root = tk.Tk()
 canvas = tk.Canvas(root, height=896, width=414, bg="#fff")
 canvas.pack()
 
-# --- "Zero Food Waste Program" Title ---
+# --- "Zero Food Waste Program" Title START ---
 mainTitle = tk.Label(root, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20)
 mainTitle.place(relx = 0.05, rely = 0)
+# --- "Zero Food Waste Program" Title END ---
 
 # --- Profile START ---
 profile_button = tk.Button(root, bg = "#000")
