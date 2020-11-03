@@ -6,25 +6,33 @@ import os
 # --------- MAIN PROGRAM ---------
 
 # --- Establishing the Window Itself ---
+
 root = tk.Tk()
+
 # --- Background Layer --- 
+
 canvas = tk.Canvas(root, height=896, width=414, bg="#fff")
 canvas.pack()
 
 # --- "Zero Food Waste Program" Title START ---
+
 mainTitle = tk.Label(root, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20)
 mainTitle.place(relx = 0.05, rely = 0)
+
 # --- "Zero Food Waste Program" Title END ---
 
 # --- Profile START ---
+
 profile_button = tk.Button(root, bg = "#000")
 profile_button.place(relwidth = 0.3, relheight = 0.12, relx = 0.1, rely = 0.12)
 
 profile_label = tk.Label(root, text = "Your Profile", bg = "#fff", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10)
 profile_label.place(relx = 0.45, rely = 0.15)
+
 # --- Profile END ---
 
-# --- Suggestions START ---
+# --- Meal Planner START ---
+
 meal_label = tk.Label(root, text = "Monday", bg = "#fff", fg = "#000", font = ('Roboto', 18, 'bold'), padx = 15, pady = 5)
 meal_label.place(relx = 0.05, rely = 0.26)
 
@@ -43,36 +51,21 @@ frame_4.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.47)
 frame_5 = tk.Frame(root, bg = "#8953f3")
 frame_5.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.62)
 
-button_1 = tk.Button(root, text = "< Previous Page", bg = "#000")
-button_1.place(relwidth = 0.35, relheight = 0.05, relx = 0.1, rely = 0.9)
+button_1 = tk.Button(root, text = "Suggestions", bg = "#000")
+button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9)
 
 separator = tk.Frame(root, bg = "#000")
-separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.5, rely = 0.9)
+separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
 
-button_2 = tk.Button(root, text = "Next Page >", bg = "#000")
-button_2.place(relwidth = 0.35, relheight = 0.05, relx = 0.55, rely = 0.9)
-# --- Suggestions END ---
+button_2 = tk.Button(root, text = "Planner", bg = "#000")
+button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
 
-# --- Portions Adjustment Box START ---
-'''
-frame_5 = tk.Frame(root, bg = "#3c1da2")
-frame_5.place(relwidth = 0.8, relheight = 0.3, relx = 0.1, rely = 0.6)
+separator = tk.Frame(root, bg = "#000")
+separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
 
-adjust_portions = tk.Label(root, text = "Adjust Portions", bg = "#3c1da2", fg = "#fff", font = ('Roboto', 25), padx = 15, pady = 10)
-adjust_portions.place(relx = 0.1, rely = 0.6)
+button_2 = tk.Button(root, text = "Instructions", bg = "#000")
+button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
 
-people_amount = tk.Label(root, text = "Breakfast", bg = "#3c1da2", fg = "#f54c49", font = ('Roboto', 20), padx = 15, pady = 10)
-people_amount.place(relx = 0.1, rely = 0.7)
-
-entry_1 = tk.Entry(root, bg = "#f54c49")
-entry_1.place(relwidth = 0.3, relheight = 0.05, relx = 0.55, rely = 0.71)
-
-average_cals = tk.Label(root, text="Average Calories", bg = "#3c1da2", fg = "#f54c49", font = ('Roboto', 20), padx = 15, pady = 10)
-average_cals.place(relx = 0.1, rely = 0.8)
-
-entry_2 = tk.Entry(root, bg = "#f54c49")
-entry_2.place(relwidth = 0.3, relheight = 0.05, relx = 0.55, rely = 0.81)
-'''
-# --- Portions Adjustment Box END ---
+# --- Meal Planner END ---
 
 root.mainloop()
