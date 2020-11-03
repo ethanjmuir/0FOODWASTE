@@ -31,13 +31,4 @@ suggestion_2.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.5)
 suggestion_3 = tk.Frame(root, bg = "#8953f6")
 suggestion_3.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.8)
 
-suggestion_4 = tk.Frame(root, bg = "#8953f6")
-suggestion_4.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 1.4)
-
-suggestion_5 = tk.Frame(root, bg = "#8953f6")
-suggestion_5.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 1.8)
-
-suggestion_2 = tk.Frame(root, bg = "#8953f6")
-suggestion_2.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 2.2)
-
 root.mainloop()
