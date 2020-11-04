@@ -32,33 +32,39 @@ class MainPage(tk.Canvas):
         # --- Main Title ---
         tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
         # ------------------
-
+        '''
         # --- Profile START ---
         profile_button = tk.Button(self, bg = "#000")
         profile_button.place(relwidth = 0.3, relheight = 0.12, relx = 0.1, rely = 0.12)
         profile_label = tk.Label(self, text = "Your Profile", bg = "#fff", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10)
         profile_label.place(relx = 0.45, rely = 0.15)
         # ---------------------
-
+        '''
         # --- Meal Planner START ---
 
-        meal_label = tk.Label(self, text = "Monday", bg = "#fff", fg = "#000", font = ('Roboto', 18, 'bold'), padx = 15, pady = 5)
-        meal_label.place(relx = 0.05, rely = 0.26)
+        meal_label = tk.Label(self, text = "Your Meals for the Day", bg = "#fff", fg = "#000", font = ('Roboto', 18, 'bold'), padx = 15, pady = 5)
+        meal_label.place(relx = 0.05, rely = 0.12)
 
         previous_button = tk.Button(self, text = "<", bg = "#000")
-        previous_button.place(relwidth = 0.075, relheight = 0.15, relx = 0, rely = 0.47)
+        previous_button.place(relwidth = 0.075, relheight = 0.15, relx = 0, rely = 0.45)
 
         next_button = tk.Button(self, text = ">", bg = "#000")
-        next_button.place(relwidth = 0.075, relheight = 0.15, relx = 0.925, rely = 0.47)
+        next_button.place(relwidth = 0.075, relheight = 0.15, relx = 0.925, rely = 0.45)
 
-        frame_3 = tk.Frame(self, bg = "#4953f6")
-        frame_3.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.32)
+        frame_3 = tk.Button(self, bg = "#4953f6")
+        frame_3.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.2)
+        breakfast_label = tk.Label(self, text = "Breakfast", bg = "#4953f6", fg = "#fff", font = ('Roboto', 18, 'bold'), padx = 15, pady = 5)
+        breakfast_label.place(relx = 0.1, rely = 0.22)
 
-        frame_4 = tk.Frame(self, bg = "#6953f4")
-        frame_4.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.47)
+        frame_4 = tk.Button(self, bg = "#6953f4")
+        frame_4.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.45)
+        lunch_label = tk.Label(self, text = "Lunch", bg = "#6953f4", fg = "#fff", font = ('Roboto', 18, 'bold'), padx = 15, pady = 5)
+        lunch_label.place(relx = 0.1, rely = 0.47)
 
-        frame_5 = tk.Frame(self, bg = "#8953f3")
-        frame_5.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.62)
+        frame_5 = tk.Button(self, bg = "#8953f3")
+        frame_5.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.7)
+        dinner_label = tk.Label(self, text = "Dinner", bg = "#8953f3", fg = "#fff", font = ('Roboto', 18, 'bold'), padx = 15, pady = 5)
+        dinner_label.place(relx = 0.1, rely = 0.72)
 
         button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
         button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
