@@ -1,3 +1,13 @@
+#   ---------------------------------------------------------------------------
+#   Name:       Zero Food Waste Program
+#   Purpose:    To ensure maximum efficiency in terms of food consumption within a household.
+#   
+#   References: This program uses the Spoonacular Recipes API.
+#				
+#   Author:     Gayan Athukorala, Ethan Muir.
+#   Created:    25-Sep-2020
+#   Updated:    2-Nov-2020
+#-----------------------------------------------------------------------------
 import tkinter as tk
 import tkinter.font as tkFont
 from tkinter import filedialog, Text
@@ -23,10 +33,10 @@ class BaseWindow(tk.Tk):
 class MainPage(tk.Canvas):
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
-        canvas_suggestions = tk.Canvas(self, height=896, width=414, bg="#fff").pack()
+        tk.Canvas(self, height=896, width=414, bg="#fff").pack()
         
         # --- Main Title ---
-        mainTitle = tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
+        tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
         # ------------------
 
         # --- Profile START ---
@@ -56,30 +66,30 @@ class MainPage(tk.Canvas):
         frame_5 = tk.Frame(self, bg = "#8953f3")
         frame_5.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.62)
 
-        button_1 = tk.Button(self, text = "Suggestions", bg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
+        button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
         button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
 
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
 
-        button_2 = tk.Button(self, text = "Planner", bg = "#000", command=lambda: master.switch_frame(MainPage))
+        button_2 = tk.Button(self, text = "Planner", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(MainPage))
         button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
 
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
 
-        button_2 = tk.Button(self, text = "Instructions", bg = "#000", command=lambda: master.switch_frame(InstructionsPage))
-        button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
+        button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
+        button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
 
         # ------------------------
 
 class SuggestionsPage(tk.Canvas):
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
-        canvas_suggestions = tk.Canvas(self, height=896, width=414, bg="#fff").pack()
+        tk.Canvas(self, height=896, width=414, bg="#fff").pack()
         
         # --- Main Title ---
-        mainTitle = tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
+        tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
         # ------------------
 
         # SUGGESTIONS
@@ -92,9 +102,6 @@ class SuggestionsPage(tk.Canvas):
         canvas.config(yscrollcommand = scrollbar.set)
         scrollbar.config(command = canvas.yview)
         '''
-        
-        mainTitle = tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20)
-        mainTitle.place(relx = 0.05, rely = 0)
 
         profile_label = tk.Label(self, text = "Recipe Suggestions", bg = "#fff", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10)
         profile_label.place(relx = 0.05, rely = 0.1)
@@ -108,28 +115,27 @@ class SuggestionsPage(tk.Canvas):
         suggestion_3 = tk.Frame(self, bg = "#8953f6")
         suggestion_3.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.8)
 
-        button_1 = tk.Button(self, text = "Suggestions", bg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
+        button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
         button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
 
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
 
-        button_2 = tk.Button(self, text = "Planner", bg = "#000", command=lambda: master.switch_frame(MainPage))
+        button_2 = tk.Button(self, text = "Planner", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(MainPage))
         button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
 
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
 
-        button_2 = tk.Button(self, text = "Instructions", bg = "#000", command=lambda: master.switch_frame(InstructionsPage))
-        button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
+        button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
+        button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
         
 class InstructionsPage(tk.Canvas):
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
-        canvas_suggestions = tk.Canvas(self, height=896, width=414, bg="#fff").pack()
+        tk.Canvas(self, height=896, width=414, bg="#fff").pack()
 
-        mainTitle = tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20)
-        mainTitle.place(relx = 0.05, rely = 0)
+        tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
 
         profile_label = tk.Label(self, text = "Instructions", bg = "#fff", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10)
         profile_label.place(relx = 0.05, rely = 0.1)
@@ -147,20 +153,20 @@ class InstructionsPage(tk.Canvas):
         suggestion_4 = tk.Frame(self, bg = "#8953f6")
         suggestion_4.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.26)
 
-        button_1 = tk.Button(self, text = "Suggestions", bg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
+        button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
         button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
 
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
 
-        button_2 = tk.Button(self, text = "Planner", bg = "#000", command=lambda: master.switch_frame(MainPage))
+        button_2 = tk.Button(self, text = "Planner", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(MainPage))
         button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
 
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
 
-        button_2 = tk.Button(self, text = "Instructions", bg = "#000", command=lambda: master.switch_frame(InstructionsPage))
-        button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
+        button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
+        button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
 
 # --- Loop All Windows ---
 master = BaseWindow()
