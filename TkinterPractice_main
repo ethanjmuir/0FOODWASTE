@@ -5,145 +5,163 @@ import os
 
 # --------- MAIN PROGRAM ---------
 
-# --- Establishing the Windows Themselves ---
+# --- Defining Button Functions START ---
 
-master          = tk.Tk()
-suggestions     = tk.Tk()
-instructions    = tk.Tk()
-profile         = tk.Tk()
+class BaseWindow(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self._frame = None
+        self.switch_frame(MainPage)
+    
+    def switch_frame(self, frame_class):
+        new_frame = frame_class(self)
+        if self._frame is not None:
+            self._frame.destroy()
+        self._frame = new_frame
+        self._frame.pack()
 
+class MainPage(tk.Canvas):
+    def __init__(self, suggestions):
+        tk.Canvas.__init__(self, suggestions)
+        canvas_suggestions = tk.Canvas(self, height=896, width=414, bg="#fff").pack()
+        
+        # --- Main Title ---
+        mainTitle = tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
+        # ------------------
 
+        # --- Profile START ---
+        profile_button = tk.Button(self, bg = "#000")
+        profile_button.place(relwidth = 0.3, relheight = 0.12, relx = 0.1, rely = 0.12)
+        profile_label = tk.Label(self, text = "Your Profile", bg = "#fff", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10)
+        profile_label.place(relx = 0.45, rely = 0.15)
+        # ---------------------
 
-# --- Background Layers --- 
-canvas = tk.Canvas(master, height=896, width=414, bg="#fff").pack()
-canvas = tk.Canvas(suggestions, height=896, width=414, bg="#fff").pack()
-canvas = tk.Canvas(instructions, height=896, width=414, bg="#fff").pack()
-canvas = tk.Canvas(profile, height=896, width=414, bg="#fff").pack()
+        # --- Meal Planner START ---
 
-# --- "Zero Food Waste Program" Titles START ---
+        meal_label = tk.Label(self, text = "Monday", bg = "#fff", fg = "#000", font = ('Roboto', 18, 'bold'), padx = 15, pady = 5)
+        meal_label.place(relx = 0.05, rely = 0.26)
 
-mainTitle = tk.Label(master, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
-mainTitle = tk.Label(suggestions, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
-mainTitle = tk.Label(instructions, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
-mainTitle = tk.Label(profile, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
+        previous_button = tk.Button(self, text = "<", bg = "#000")
+        previous_button.place(relwidth = 0.075, relheight = 0.15, relx = 0, rely = 0.47)
 
-# --- "Zero Food Waste Program" Titles END ---
+        next_button = tk.Button(self, text = ">", bg = "#000")
+        next_button.place(relwidth = 0.075, relheight = 0.15, relx = 0.925, rely = 0.47)
 
-# MASTER PAGE
+        frame_3 = tk.Frame(self, bg = "#4953f6")
+        frame_3.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.32)
 
-# --- Profile START ---
+        frame_4 = tk.Frame(self, bg = "#6953f4")
+        frame_4.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.47)
 
-profile_button = tk.Button(master, bg = "#000")
-profile_button.place(relwidth = 0.3, relheight = 0.12, relx = 0.1, rely = 0.12)
+        frame_5 = tk.Frame(self, bg = "#8953f3")
+        frame_5.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.62)
 
-profile_label = tk.Label(master, text = "Your Profile", bg = "#fff", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10)
-profile_label.place(relx = 0.45, rely = 0.15)
+        button_1 = tk.Button(self, text = "Suggestions", bg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
+        button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
 
-# --- Profile END ---
+        separator = tk.Frame(self, bg = "#000")
+        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
 
-# --- Meal Planner START ---
+        button_2 = tk.Button(self, text = "Planner", bg = "#000", command=lambda: master.switch_frame(MainPage))
+        button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
 
-meal_label = tk.Label(master, text = "Monday", bg = "#fff", fg = "#000", font = ('Roboto', 18, 'bold'), padx = 15, pady = 5)
-meal_label.place(relx = 0.05, rely = 0.26)
+        separator = tk.Frame(self, bg = "#000")
+        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
 
-previous_button = tk.Button(master, text = "<", bg = "#000")
-previous_button.place(relwidth = 0.075, relheight = 0.15, relx = 0, rely = 0.47)
+        button_2 = tk.Button(self, text = "Instructions", bg = "#000", command=lambda: master.switch_frame(InstructionsPage))
+        button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
 
-next_button = tk.Button(master, text = ">", bg = "#000")
-next_button.place(relwidth = 0.075, relheight = 0.15, relx = 0.925, rely = 0.47)
+        # ------------------------
 
-frame_3 = tk.Frame(master, bg = "#4953f6")
-frame_3.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.32)
+class SuggestionsPage(tk.Canvas):
+    def __init__(self, suggestions):
+        tk.Canvas.__init__(self, suggestions)
+        canvas_suggestions = tk.Canvas(self, height=896, width=414, bg="#fff").pack()
+        
+        # --- Main Title ---
+        mainTitle = tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
+        # ------------------
 
-frame_4 = tk.Frame(master, bg = "#6953f4")
-frame_4.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.47)
+        # SUGGESTIONS
 
-frame_5 = tk.Frame(master, bg = "#8953f3")
-frame_5.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.62)
+        # --- Right-Most Scrollbar ---
+        '''
+        scrollbar = tk.Scrollbar(self, bg = "#fff").place(relwidth = 0.5, relheight = 1.0, relx = 0.95, rely = 0)
+        
+        
+        canvas.config(yscrollcommand = scrollbar.set)
+        scrollbar.config(command = canvas.yview)
+        '''
+        
+        mainTitle = tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20)
+        mainTitle.place(relx = 0.05, rely = 0)
 
-button_1 = tk.Button(master, text = "Suggestions", bg = "#000")
-button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9)
+        profile_label = tk.Label(self, text = "Recipe Suggestions", bg = "#fff", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10)
+        profile_label.place(relx = 0.05, rely = 0.1)
 
-separator = tk.Frame(master, bg = "#000")
-separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
+        suggestion_1 = tk.Frame(self, bg = "#8953f6")
+        suggestion_1.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.2)
 
-button_2 = tk.Button(master, text = "Planner", bg = "#000")
-button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
+        suggestion_2 = tk.Frame(self, bg = "#8953f6")
+        suggestion_2.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.5)
 
-separator = tk.Frame(master, bg = "#000")
-separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
+        suggestion_3 = tk.Frame(self, bg = "#8953f6")
+        suggestion_3.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.8)
 
-button_2 = tk.Button(master, text = "Instructions", bg = "#000")
-button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
+        button_1 = tk.Button(self, text = "Suggestions", bg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
+        button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
 
-# --- Meal Planner END ---
+        separator = tk.Frame(self, bg = "#000")
+        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
 
-# SUGGESTIONS
+        button_2 = tk.Button(self, text = "Planner", bg = "#000", command=lambda: master.switch_frame(MainPage))
+        button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
 
-# --- Right-Most Scrollbar ---
+        separator = tk.Frame(self, bg = "#000")
+        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
 
-scrollbar = tk.Scrollbar(suggestions, bg = "#fff").place(relwidth = 0.5, relheight = 1.0, relx = 0.95, rely = 0)
+        button_2 = tk.Button(self, text = "Instructions", bg = "#000", command=lambda: master.switch_frame(InstructionsPage))
+        button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
+        
+class InstructionsPage(tk.Canvas):
+    def __init__(self, suggestions):
+        tk.Canvas.__init__(self, suggestions)
+        canvas_suggestions = tk.Canvas(self, height=896, width=414, bg="#fff").pack()
 
-'''
-canvas.config(yscrollcommand = scrollbar.set)
-scrollbar.config(command = canvas.yview)
-'''
+        mainTitle = tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20)
+        mainTitle.place(relx = 0.05, rely = 0)
 
-mainTitle = tk.Label(suggestions, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20)
-mainTitle.place(relx = 0.05, rely = 0)
+        profile_label = tk.Label(self, text = "Instructions", bg = "#fff", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10)
+        profile_label.place(relx = 0.05, rely = 0.1)
 
-profile_label = tk.Label(suggestions, text = "Recipe Suggestions", bg = "#fff", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10)
-profile_label.place(relx = 0.05, rely = 0.1)
+        suggestion_1 = tk.Frame(self, bg = "#8953f6")
+        suggestion_1.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.2)
 
-suggestion_1 = tk.Frame(suggestions, bg = "#8953f6")
-suggestion_1.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.2)
+        suggestion_2 = tk.Frame(self, bg = "#8953f6")
+        suggestion_2.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.6)
+        '''
+        '''
+        suggestion_3 = tk.Frame(self, bg = "#8953f6")
+        suggestion_3.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.26)
 
-suggestion_2 = tk.Frame(suggestions, bg = "#8953f6")
-suggestion_2.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.5)
+        suggestion_4 = tk.Frame(self, bg = "#8953f6")
+        suggestion_4.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.26)
 
-suggestion_3 = tk.Frame(suggestions, bg = "#8953f6")
-suggestion_3.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.8)
+        button_1 = tk.Button(self, text = "Suggestions", bg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
+        button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
 
-# INSTRUCTIONS
+        separator = tk.Frame(self, bg = "#000")
+        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
 
-'''
-scrollbar = tk.Scrollbar(root)
-scrollbar.pack(side = RIGHT, fill = Y)
-'''
+        button_2 = tk.Button(self, text = "Planner", bg = "#000", command=lambda: master.switch_frame(MainPage))
+        button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
 
-mainTitle = tk.Label(instructions, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20)
-mainTitle.place(relx = 0.05, rely = 0)
+        separator = tk.Frame(self, bg = "#000")
+        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
 
-profile_label = tk.Label(instructions, text = "Instructions", bg = "#fff", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10)
-profile_label.place(relx = 0.05, rely = 0.1)
-
-suggestion_1 = tk.Frame(instructions, bg = "#8953f6")
-suggestion_1.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.2)
-
-suggestion_2 = tk.Frame(instructions, bg = "#8953f6")
-suggestion_2.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.6)
-'''
-suggestion_3 = tk.Frame(instructions, bg = "#8953f6")
-suggestion_3.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.26)
-
-suggestion_4 = tk.Frame(instructions, bg = "#8953f6")
-suggestion_4.place(relwidth = 0.8, relheight = 0.2, relx = 0.1, rely = 0.26)
-
-button_1 = tk.Button(instructions, bg = "#000")
-button_1.place(relwidth = 0.35, relheight = 0.05, relx = 0.1, rely = 0.535)
-
-separator = tk.Frame(instructions, bg = "#000")
-separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.5, rely = 0.535)
-
-button_2 = tk.Button(instructions, bg = "#000")
-button_2.place(relwidth = 0.35, relheight = 0.05, relx = 0.55, rely = 0.535)
-
-frame_5 = tk.Frame(instructions, bg = "#3c1da2")
-frame_5.place(relwidth = 0.8, relheight = 0.3, relx = 0.1, rely = 0.6)
-'''
+        button_2 = tk.Button(self, text = "Instructions", bg = "#000", command=lambda: master.switch_frame(InstructionsPage))
+        button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
 
 # --- Loop All Windows ---
+master = BaseWindow()
 master.mainloop()
-suggestions.mainloop()
-instructions.mainloop()
-profile.mainloop()
