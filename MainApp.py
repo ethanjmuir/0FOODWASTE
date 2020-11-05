@@ -131,9 +131,9 @@ class BreakfastPage(tk.Canvas):
             #configure scrollbar
             my_scrollbar.config(command = my_listbox.yview)
             my_scrollbar.pack(side=RIGHT, fill=Y)
-            my_frame.place(relx = 0.2, rely = 0.7, relwidth = 0.6, relheight = 0.4)
+            my_frame.place(relx = 0.1, rely = 0.7, relwidth = 0.8, relheight = 0.1)
                 
-            my_listbox.place(relwidth = 0.6, relheight = 0.1) 
+            my_listbox.place(relwidth = 0.9, relheight = 1) 
 
             #search recipe and add it to list box
             food = entry_1.get()
