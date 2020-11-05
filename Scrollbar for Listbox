@@ -1,0 +1,38 @@
+from tkinter import *
+import requests
+
+api_key = ('?apiKey=782bba4ef5fd462d81b2102ebb96fe55')
+
+root = Tk()
+root.geometry("400x400")
+
+#Create frame and scroll bar
+my_frame = Frame(root)
+my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
+
+#Listbox
+my_listbox = Listbox(my_frame, height=5, width = 50, yscrollcommand=my_scrollbar.set)
+
+#configure scrollbar
+my_scrollbar.config(command = my_listbox.yview)
+my_scrollbar.pack(side=RIGHT, fill=Y)
+my_frame.pack()
+    
+my_listbox.pack(pady=15)
+
+#search recipe and add it to list boc
+food = str(input('what u wanna eat?: '))
+print('')
+request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
+request_search_recipe_json=request_search_recipe.json()
+
+for i in request_search_recipe_json['results']:
+    position = 0
+    my_listbox.insert(position, (i['title']))
+    #print(i['title'])
+    #print(i['id'])
+    #print('')
+    position +=1
+
+
+root.mainloop()
