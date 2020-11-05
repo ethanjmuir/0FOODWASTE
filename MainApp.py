@@ -111,18 +111,26 @@ class BreakfastPage(tk.Canvas):
 
         entry_1 = tk.Entry(self, bg = "#f54c49")
         entry_1.place(relwidth = 0.6, relheight = 0.2, relx = 0.2, rely = 0.3)
+        '''
+        def switch_frame(self, frame_class):
+            new_frame = frame_class(self)
+            if self._frame is not None:
+                self._frame.destroy()
+            self._frame = new_frame
+            self._frame.pack()
+        '''
+        def search():
 
-        def search(self):
-
+            '''
             root = Tk()
             root.geometry("400x400")
-
+            '''
+            
             #Create frame and scroll bar
-            my_frame = Frame(root)
-            my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
+            my_scrollbar = Scrollbar(suggestion_1, orient = VERTICAL)
 
             #Listbox
-            my_listbox = Listbox(my_frame, height=5, width = 50, yscrollcommand=my_scrollbar.set)
+            my_listbox = Listbox(suggestion_1, relheight = 0.8, relwidth = 0.8, yscrollcommand=my_scrollbar.set)
 
             #configure scrollbar
             my_scrollbar.config(command = my_listbox.yview)
@@ -145,8 +153,8 @@ class BreakfastPage(tk.Canvas):
 
 
 
-        enter_button = tk.Button(self, text = "Enter", bg = "#ccd1d9", fg = "#000", command = search)
-        enter_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.9)
+        enter_button = tk.Button(self, text = "Enter", bg = "#ccd1d9", fg = "#000", command=lambda: master.search(suggestion_1))
+        enter_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.6)
            
         '''
         button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
