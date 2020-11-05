@@ -1,7 +1,8 @@
 import requests
 import tkinter as tk
 import tkinter.font as tkFont
-from tkinter import filedialog, Text
+#from tkinter import filedialog, Text, Frame
+from tkinter import *
 import os
 
 # API Setup
@@ -68,7 +69,6 @@ class MainPage(tk.Canvas):
         '''
         button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
         button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
-
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
         '''
@@ -77,7 +77,6 @@ class MainPage(tk.Canvas):
         '''
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
-
         button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
         button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
         '''
@@ -85,6 +84,7 @@ class MainPage(tk.Canvas):
 
 class BreakfastPage(tk.Canvas):
     def __init__(self, suggestions):
+
         tk.Canvas.__init__(self, suggestions)
         tk.Canvas(self, height=896, width=414, bg="#fff").pack()
         
@@ -112,10 +112,45 @@ class BreakfastPage(tk.Canvas):
         entry_1 = tk.Entry(self, bg = "#f54c49")
         entry_1.place(relwidth = 0.6, relheight = 0.2, relx = 0.2, rely = 0.3)
 
+        def search(self):
+
+            root = Tk()
+            root.geometry("400x400")
+
+            #Create frame and scroll bar
+            my_frame = Frame(root)
+            my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
+
+            #Listbox
+            my_listbox = Listbox(my_frame, height=5, width = 50, yscrollcommand=my_scrollbar.set)
+
+            #configure scrollbar
+            my_scrollbar.config(command = my_listbox.yview)
+            my_scrollbar.pack(side=RIGHT, fill=Y)
+            my_frame.pack()
+                
+            my_listbox.pack(pady=15)
+
+            food = entry_1.get()
+            request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
+            request_search_recipe_json=request_search_recipe.json()
+
+            for i in request_search_recipe_json['results']:
+                position = 0
+                my_listbox.insert(position, (i['title']))
+                #print(i['title'])
+                #print(i['id'])
+                #print('')
+                position +=1
+
+
+
+        enter_button = tk.Button(self, text = "Enter", bg = "#ccd1d9", fg = "#000", command = search)
+        enter_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.9)
+           
         '''
         button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
         button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
-
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
         '''
@@ -124,7 +159,6 @@ class BreakfastPage(tk.Canvas):
         '''
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
-
         button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
         button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
         '''
@@ -153,7 +187,6 @@ class LunchPage(tk.Canvas):
         '''
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
-
         button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
         button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
         '''
@@ -189,7 +222,6 @@ class DinnerPage(tk.Canvas):
         '''
         button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
         button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
-
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
         '''
@@ -198,7 +230,6 @@ class DinnerPage(tk.Canvas):
         '''
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
-
         button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
         button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
         '''
@@ -207,78 +238,3 @@ class DinnerPage(tk.Canvas):
 # --- Loop All Windows ---
 master = BaseWindow()
 master.mainloop()
-
-# --- THE PROGRAM BEHIND THE APP ---
-
-#search recipe
-food = str(input('what u wanna eat?: '))
-print('')
-request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
-request_search_recipe_json=request_search_recipe.json()
-print(request_search_recipe_json)
-
-for i in request_search_recipe_json['results']:
-    print(i['title'])
-    print(i['id'])
-    print('')
-
-#get recipe instructions/info
-input_id = str(input('what is the id of the recipe you want?: '))
-
-print('')
-recipe_instructions = requests.get('https://api.spoonacular.com/recipes/'+ input_id+'/analyzedInstructions' + api_key)
-
-recipe_instructions_json=recipe_instructions.json()
-
-print(recipe_instructions_json)
-
-for i in recipe_instructions_json:
-    for n in i['steps']:
-        #Step Number
-        print('Step Number: ' + str(n['number']))
-        #Ingredients
-        display_header = True
-        for x in n['ingredients']:
-            while display_header == True:
-                print('Ingredients List:')
-                display_header = False
-            print(x['localizedName'])
-        #Equipment
-        for y in n['equipment']:
-            print('Equipment: ' + y['localizedName'])
-        #Instructions
-        print('Instructions: ' + n['step'])
-        print('')
-
-#get recipe nutrition calorie stuff
-
-recipe_nutrition = requests.get('https://api.spoonacular.com/recipes/1003464/nutritionWidget.json' + api_key)
-
-recipe_nutrition_json = recipe_nutrition.json()
-calories = recipe_nutrition_json['calories']
-
-recipe_info = requests.get('https://api.spoonacular.com/recipes/1003464/information?apiKey=782bba4ef5fd462d81b2102ebb96fe55&includeNutrition=false')
-
-recipe_info_json = recipe_info.json()
-servings = recipe_info_json['servings']
-
-total_calories = input(str('how many cal u eat: '))
-
-calorie_adjustment_ratio = float(total_calories)/float(calories)
-adjusted_servings= round(float(total_calories)*(float(servings)/float(calories)),0)
-print('This will create about ' + str(adjusted_servings) + ' serving(s) from this meal')
-print('')
-#adjust amount of ingredient to match desired calorie size
-ingredients_info = requests.get('https://api.spoonacular.com/recipes/1003464/ingredientWidget.json'+api_key)
-
-ingredients_info_json = ingredients_info.json()
-#print(ingredients_info_json)
-for i in ingredients_info_json['ingredients']:
-    print(i['name'])
-    (i['amount']).popitem()
-    for j in ((i['amount']).values()):
-        print(j['value'])
-        adjusted_value = (j['value'])*calorie_adjustment_ratio
-        round(adjusted_value,2)
-        print(str(adjusted_value) + ' ' + str(j['unit']))
-        print('')
