@@ -126,14 +126,14 @@ class BreakfastPage(tk.Canvas):
             my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
 
             #Listbox
-            my_listbox = Listbox(my_frame, height=5, width = 50, yscrollcommand=my_scrollbar.set)
+            my_listbox = Listbox(my_frame, yscrollcommand=my_scrollbar.set)
 
             #configure scrollbar
             my_scrollbar.config(command = my_listbox.yview)
             my_scrollbar.pack(side=RIGHT, fill=Y)
-            my_frame.place(relx = 0.1, rely = 0.7, relwidth = 0.8, relheight = 0.1)
+            my_frame.place(relx = 0.15, rely = 0.62, relwidth = 0.7, relheight = 0.15)
                 
-            my_listbox.place(relwidth = 0.9, relheight = 1) 
+            my_listbox.pack()
 
             #search recipe and add it to list box
             food = entry_1.get()
@@ -152,8 +152,8 @@ class BreakfastPage(tk.Canvas):
                 position +=1
 
 
-        enter_button = tk.Button(self, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search())
-        enter_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.6)
+        enter_button = tk.Button(self, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
+        enter_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.55)
            
         '''
         button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
@@ -185,6 +185,42 @@ class LunchPage(tk.Canvas):
 
         entry_1 = tk.Entry(self, bg = "#f54c49")
         entry_1.place(relwidth = 0.6, relheight = 0.2, relx = 0.2, rely = 0.3)
+
+        def search():
+                        
+            #Create frame and scroll bar
+            my_frame = Frame()
+            my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
+
+            #Listbox
+            my_listbox = Listbox(my_frame, yscrollcommand=my_scrollbar.set)
+
+            #configure scrollbar
+            my_scrollbar.config(command = my_listbox.yview)
+            my_scrollbar.pack(side=RIGHT, fill=Y)
+            my_frame.place(relx = 0.15, rely = 0.62, relwidth = 0.7, relheight = 0.15)
+                
+            my_listbox.pack()
+
+            #search recipe and add it to list box
+            food = entry_1.get()
+            print(food)
+            request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
+            request_search_recipe_json=request_search_recipe.json()
+            print(food)
+            for i in request_search_recipe_json['results']:
+                print('hello')
+                print(i['title'])
+                position = 0
+                my_listbox.insert(position, (i['title']))
+                #print(i['title'])
+                #print(i['id'])
+                #print('')
+                position +=1
+
+
+        enter_button = tk.Button(self, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
+        enter_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.55)
         '''
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
@@ -226,6 +262,41 @@ class DinnerPage(tk.Canvas):
 
         entry_1 = tk.Entry(self, bg = "#f54c49")
         entry_1.place(relwidth = 0.6, relheight = 0.2, relx = 0.2, rely = 0.3)
+
+        def search():
+                        
+            #Create frame and scroll bar
+            my_frame = Frame()
+            my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
+
+            #Listbox
+            my_listbox = Listbox(my_frame, yscrollcommand=my_scrollbar.set)
+
+            #configure scrollbar
+            my_scrollbar.config(command = my_listbox.yview)
+            my_scrollbar.pack(side=RIGHT, fill=Y)
+            my_frame.place(relx = 0.15, rely = 0.62, relwidth = 0.7, relheight = 0.15)
+                
+            my_listbox.pack()
+
+            #search recipe and add it to list box
+            food = entry_1.get()
+            print(food)
+            request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
+            request_search_recipe_json=request_search_recipe.json()
+            print(food)
+            for i in request_search_recipe_json['results']:
+                print('hello')
+                print(i['title'])
+                position = 0
+                my_listbox.insert(position, (i['title']))
+                #print(i['title'])
+                #print(i['id'])
+                #print('')
+                position +=1
+
+        enter_button = tk.Button(self, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
+        enter_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.55)
         '''
         button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
         button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
