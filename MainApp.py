@@ -109,6 +109,9 @@ class BreakfastPage(tk.Canvas):
         suggestion_1 = tk.Frame(self, bg = "#8953f6")
         suggestion_1.place(relwidth = 0.8, relheight = 0.6, relx = 0.1, rely = 0.2)
 
+        entry_1 = tk.Entry(self, bg = "#f54c49")
+        entry_1.place(relwidth = 0.6, relheight = 0.2, relx = 0.2, rely = 0.3)
+
         '''
         button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
         button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
@@ -139,6 +142,8 @@ class LunchPage(tk.Canvas):
         suggestion_1 = tk.Frame(self, bg = "#8953f6")
         suggestion_1.place(relwidth = 0.8, relheight = 0.6, relx = 0.1, rely = 0.2)
 
+        entry_1 = tk.Entry(self, bg = "#f54c49")
+        entry_1.place(relwidth = 0.6, relheight = 0.2, relx = 0.2, rely = 0.3)
         '''
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
@@ -179,6 +184,8 @@ class DinnerPage(tk.Canvas):
         suggestion_1 = tk.Frame(self, bg = "#8953f6")
         suggestion_1.place(relwidth = 0.8, relheight = 0.6, relx = 0.1, rely = 0.2)
 
+        entry_1 = tk.Entry(self, bg = "#f54c49")
+        entry_1.place(relwidth = 0.6, relheight = 0.2, relx = 0.2, rely = 0.3)
         '''
         button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
         button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
