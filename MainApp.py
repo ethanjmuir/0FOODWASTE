@@ -120,30 +120,30 @@ class BreakfastPage(tk.Canvas):
             self._frame.pack()
         '''
         def search():
-
-            '''
-            root = Tk()
-            root.geometry("400x400")
-            '''
-            
+                        
             #Create frame and scroll bar
-            my_scrollbar = Scrollbar(suggestion_1, orient = VERTICAL)
+            my_frame = Frame()
+            my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
 
             #Listbox
-            my_listbox = Listbox(suggestion_1, relheight = 0.8, relwidth = 0.8, yscrollcommand=my_scrollbar.set)
+            my_listbox = Listbox(my_frame, height=5, width = 50, yscrollcommand=my_scrollbar.set)
 
             #configure scrollbar
             my_scrollbar.config(command = my_listbox.yview)
             my_scrollbar.pack(side=RIGHT, fill=Y)
-            my_frame.pack()
+            my_frame.place(relx = 0.2, rely = 0.7, relwidth = 0.6, relheight = 0.4)
                 
-            my_listbox.pack(pady=15)
+            my_listbox.place(relwidth = 0.6, relheight = 0.1) 
 
+            #search recipe and add it to list box
             food = entry_1.get()
+            print(food)
             request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
             request_search_recipe_json=request_search_recipe.json()
-
+            print(food)
             for i in request_search_recipe_json['results']:
+                print('hello')
+                print(i['title'])
                 position = 0
                 my_listbox.insert(position, (i['title']))
                 #print(i['title'])
@@ -152,8 +152,7 @@ class BreakfastPage(tk.Canvas):
                 position +=1
 
 
-
-        enter_button = tk.Button(self, text = "Enter", bg = "#ccd1d9", fg = "#000", command=lambda: master.search(suggestion_1))
+        enter_button = tk.Button(self, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search())
         enter_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.6)
            
         '''
