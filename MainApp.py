@@ -6,8 +6,10 @@ from tkinter import *
 import os
 
 # API Setup
+'''
 api_key = ('?apiKey=782bba4ef5fd462d81b2102ebb96fe55')
-
+'''
+api_key = ('?apiKey=76865ec43abf4ed8b775b956dd6dfaf5')
 # --------- THE APP ---------
 
 # --- Defining Button Functions START ---
@@ -49,7 +51,7 @@ class MainPage(tk.Canvas):
         previous_button = tk.Button(self, text = "<", bg = "#000")
         previous_button.place(relwidth = 0.075, relheight = 0.15, relx = 0, rely = 0.45)
 
-        next_button = tk.Button(self, text = ">", bg = "#000")
+        next_button = tk.Button(self, text = ">", bg = "#000", command=lambda: master.switch_frame(IngredientsPage))
         next_button.place(relwidth = 0.075, relheight = 0.15, relx = 0.925, rely = 0.45)
 
         frame_3 = tk.Button(self, bg = "#4953f6", command=lambda: master.switch_frame(BreakfastPage))
@@ -107,22 +109,15 @@ class BreakfastPage(tk.Canvas):
         profile_label.place(relx = 0.05, rely = 0.1)
 
         suggestion_1 = tk.Frame(self, bg = "#8953f6")
-        suggestion_1.place(relwidth = 0.8, relheight = 0.6, relx = 0.1, rely = 0.2)
+        suggestion_1.place(relwidth = 0.8, relheight = 0.65, relx = 0.1, rely = 0.2)
 
-        entry_1 = tk.Entry(self, bg = "#f54c49")
-        entry_1.place(relwidth = 0.6, relheight = 0.2, relx = 0.2, rely = 0.3)
-        '''
-        def switch_frame(self, frame_class):
-            new_frame = frame_class(self)
-            if self._frame is not None:
-                self._frame.destroy()
-            self._frame = new_frame
-            self._frame.pack()
-        '''
+        entry_1 = tk.Entry(suggestion_1, bg = "#f54c49")
+        entry_1.place(relwidth = 0.6, relheight = 0.1, relx = 0.1, rely = 0.1)
+        
         def search():
                         
             #Create frame and scroll bar
-            my_frame = Frame()
+            my_frame = Frame(suggestion_1)
             my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
 
             #Listbox
@@ -131,9 +126,9 @@ class BreakfastPage(tk.Canvas):
             #configure scrollbar
             my_scrollbar.config(command = my_listbox.yview)
             my_scrollbar.pack(side=RIGHT, fill=Y)
-            my_frame.place(relx = 0.15, rely = 0.62, relwidth = 0.7, relheight = 0.15)
+            my_frame.place(relx = 0.1, rely = 0.25, relwidth = 0.8, relheight = 0.65)
                 
-            my_listbox.pack()
+            my_listbox.place(relx = 0, rely = 0, relwidth = 0.94, relheight = 1)
 
             #search recipe and add it to list box
             food = entry_1.get()
@@ -152,8 +147,8 @@ class BreakfastPage(tk.Canvas):
                 position +=1
 
 
-        enter_button = tk.Button(self, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
-        enter_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.55)
+        enter_button = tk.Button(suggestion_1, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
+        enter_button.place(relwidth = 0.2, relheight = 0.1, relx = 0.7, rely = 0.1)
            
         '''
         button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
@@ -183,13 +178,13 @@ class LunchPage(tk.Canvas):
         suggestion_1 = tk.Frame(self, bg = "#8953f6")
         suggestion_1.place(relwidth = 0.8, relheight = 0.6, relx = 0.1, rely = 0.2)
 
-        entry_1 = tk.Entry(self, bg = "#f54c49")
-        entry_1.place(relwidth = 0.6, relheight = 0.2, relx = 0.2, rely = 0.3)
-
+        entry_1 = tk.Entry(suggestion_1, bg = "#f54c49")
+        entry_1.place(relwidth = 0.6, relheight = 0.1, relx = 0.1, rely = 0.1)
+        
         def search():
                         
             #Create frame and scroll bar
-            my_frame = Frame()
+            my_frame = Frame(suggestion_1)
             my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
 
             #Listbox
@@ -198,9 +193,9 @@ class LunchPage(tk.Canvas):
             #configure scrollbar
             my_scrollbar.config(command = my_listbox.yview)
             my_scrollbar.pack(side=RIGHT, fill=Y)
-            my_frame.place(relx = 0.15, rely = 0.62, relwidth = 0.7, relheight = 0.15)
+            my_frame.place(relx = 0.1, rely = 0.25, relwidth = 0.8, relheight = 0.65)
                 
-            my_listbox.pack()
+            my_listbox.place(relx = 0, rely = 0, relwidth = 0.94, relheight = 1)
 
             #search recipe and add it to list box
             food = entry_1.get()
@@ -219,8 +214,8 @@ class LunchPage(tk.Canvas):
                 position +=1
 
 
-        enter_button = tk.Button(self, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
-        enter_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.55)
+        enter_button = tk.Button(suggestion_1, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
+        enter_button.place(relwidth = 0.2, relheight = 0.1, relx = 0.7, rely = 0.1)
         '''
         separator = tk.Frame(self, bg = "#000")
         separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
@@ -260,13 +255,13 @@ class DinnerPage(tk.Canvas):
         suggestion_1 = tk.Frame(self, bg = "#8953f6")
         suggestion_1.place(relwidth = 0.8, relheight = 0.6, relx = 0.1, rely = 0.2)
 
-        entry_1 = tk.Entry(self, bg = "#f54c49")
-        entry_1.place(relwidth = 0.6, relheight = 0.2, relx = 0.2, rely = 0.3)
-
+        entry_1 = tk.Entry(suggestion_1, bg = "#f54c49")
+        entry_1.place(relwidth = 0.6, relheight = 0.1, relx = 0.1, rely = 0.1)
+        
         def search():
                         
             #Create frame and scroll bar
-            my_frame = Frame()
+            my_frame = Frame(suggestion_1)
             my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
 
             #Listbox
@@ -275,9 +270,9 @@ class DinnerPage(tk.Canvas):
             #configure scrollbar
             my_scrollbar.config(command = my_listbox.yview)
             my_scrollbar.pack(side=RIGHT, fill=Y)
-            my_frame.place(relx = 0.15, rely = 0.62, relwidth = 0.7, relheight = 0.15)
+            my_frame.place(relx = 0.1, rely = 0.25, relwidth = 0.8, relheight = 0.65)
                 
-            my_listbox.pack()
+            my_listbox.place(relx = 0, rely = 0, relwidth = 0.94, relheight = 1)
 
             #search recipe and add it to list box
             food = entry_1.get()
@@ -295,8 +290,77 @@ class DinnerPage(tk.Canvas):
                 #print('')
                 position +=1
 
-        enter_button = tk.Button(self, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
-        enter_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.55)
+
+        enter_button = tk.Button(suggestion_1, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
+        enter_button.place(relwidth = 0.2, relheight = 0.1, relx = 0.7, rely = 0.1)
+        '''
+        button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
+        button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
+        separator = tk.Frame(self, bg = "#000")
+        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
+        '''
+        button_2 = tk.Button(self, text = "Home", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(MainPage))
+        button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
+        '''
+        separator = tk.Frame(self, bg = "#000")
+        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
+        button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
+        button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
+        '''
+
+class IngredientsPage(tk.Canvas):
+    def __init__(self, suggestions):
+        tk.Canvas.__init__(self, suggestions)
+        tk.Canvas(self, height=896, width=414, bg="#fff").pack()
+        # --- Main Title ---
+        tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
+        # ------------------
+
+        # SUGGESTIONS
+
+        # --- Right-Most Scrollbar ---
+
+        ingredients_label = tk.Button(self, text = "Ingredients", bg = "#f54c49", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10, command=lambda: master.switch_frame(IngredientsPage))
+        ingredients_label.place(relwidth=0.4, relheight=0.1, relx = 0.1, rely = 0.1)
+        
+        instructions_label = tk.Button(self, text = "Instructions", bg = "#8953f6", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10, command=lambda: master.switch_frame(InstructionsPage))
+        instructions_label.place(relwidth=0.4, relheight=0.1, relx = 0.5, rely = 0.1)
+
+        suggestion_1 = tk.Frame(self, bg = "#f54c49")
+        suggestion_1.place(relwidth = 0.8, relheight = 0.6, relx = 0.1, rely = 0.2)
+        
+        def search():
+                        
+            #Create frame and scroll bar
+            my_frame = Frame(suggestion_1)
+            my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
+
+            #Listbox
+            my_listbox = Listbox(my_frame, yscrollcommand=my_scrollbar.set)
+
+            #configure scrollbar
+            my_scrollbar.config(command = my_listbox.yview)
+            my_scrollbar.pack(side=RIGHT, fill=Y)
+            my_frame.place(relx = 0.1, rely = 0.1, relwidth = 0.8, relheight = 0.8)
+                
+            my_listbox.place(relx = 0, rely = 0, relwidth = 0.94, relheight = 1)
+
+            #search recipe and add it to list box
+            food = entry_1.get()
+            print(food)
+            request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
+            request_search_recipe_json=request_search_recipe.json()
+            print(food)
+            for i in request_search_recipe_json['results']:
+                print('hello')
+                print(i['title'])
+                position = 0
+                my_listbox.insert(position, (i['title']))
+                #print(i['title'])
+                #print(i['id'])
+                #print('')
+                position +=1
+
         '''
         button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
         button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
@@ -312,6 +376,73 @@ class DinnerPage(tk.Canvas):
         button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
         '''
         
+class InstructionsPage(tk.Canvas):
+    def __init__(self, suggestions):
+        tk.Canvas.__init__(self, suggestions)
+        tk.Canvas(self, height=896, width=414, bg="#fff").pack()
+        # --- Main Title ---
+        tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
+        # ------------------
+
+        # SUGGESTIONS
+
+        # --- Right-Most Scrollbar ---
+
+        ingredients_label = tk.Button(self, text = "Ingredients", bg = "#f54c49", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10, command=lambda: master.switch_frame(IngredientsPage))
+        ingredients_label.place(relwidth=0.4, relheight=0.1, relx = 0.1, rely = 0.1)
+        
+        instructions_label = tk.Button(self, text = "Instructions", bg = "#8953f6", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10, command=lambda: master.switch_frame(InstructionsPage))
+        instructions_label.place(relwidth=0.4, relheight=0.1, relx = 0.5, rely = 0.1)
+
+        suggestion_1 = tk.Frame(self, bg = "#8953f6")
+        suggestion_1.place(relwidth = 0.8, relheight = 0.6, relx = 0.1, rely = 0.2)
+
+        def search():
+                        
+            #Create frame and scroll bar
+            my_frame = Frame(suggestion_1)
+            my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
+
+            #Listbox
+            my_listbox = Listbox(my_frame, yscrollcommand=my_scrollbar.set)
+
+            #configure scrollbar
+            my_scrollbar.config(command = my_listbox.yview)
+            my_scrollbar.pack(side=RIGHT, fill=Y)
+            my_frame.place(relx = 0.1, rely = 0.1, relwidth = 0.8, relheight = 0.8)
+                
+            my_listbox.place(relx = 0, rely = 0, relwidth = 0.94, relheight = 1)
+
+            #search recipe and add it to list box
+            food = entry_1.get()
+            print(food)
+            request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
+            request_search_recipe_json=request_search_recipe.json()
+            print(food)
+            for i in request_search_recipe_json['results']:
+                print('hello')
+                print(i['title'])
+                position = 0
+                my_listbox.insert(position, (i['title']))
+                #print(i['title'])
+                #print(i['id'])
+                #print('')
+                position +=1
+        
+        '''
+        button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
+        button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
+        separator = tk.Frame(self, bg = "#000")
+        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
+        '''
+        button_2 = tk.Button(self, text = "Home", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(MainPage))
+        button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
+        '''
+        separator = tk.Frame(self, bg = "#000")
+        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
+        button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
+        button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
+        '''
 
 # --- Loop All Windows ---
 master = BaseWindow()
