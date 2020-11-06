@@ -7,9 +7,12 @@ import os
 
 # API Setup
 
-api_key = ('?apiKey=782bba4ef5fd462d81b2102ebb96fe55')
+#api_key = ('?apiKey=782bba4ef5fd462d81b2102ebb96fe55')
 #api_key = ('?apiKey=76865ec43abf4ed8b775b956dd6dfaf5')
 #api_key = ('?apiKey=b2851b4e879e4d24800357e02da17645')
+api_key = ('?apiKey=9172aaf2bf104daa84d9e09f6f54a3ed')
+#api_key = ('?apiKey=83e419f9ed354ccc86b57c36f95c7811')
+
 
 recipe_id_list = [' ']
 total_calories_list = [' ']
@@ -116,11 +119,12 @@ class BreakfastPage(tk.Canvas):
 
             #search recipe and add it to list box
             food = entry_1.get()
+                  
             if food == '':
-                no_recipe_label = tk.Label(self, text = "Please Input a Recipe", bg = "#fff", fg = '#000', font = ('Roboto', 10), padx = 10, pady = 15)
-                no_recipe_label.place(relx = 0.1, rely = 0.8)
+                no_recipe_entered_label = tk.Label(self, text = "No Recipes Found", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
+                no_recipe_entered_label.place(relx = 0.3, rely = 0.7)
                 
-            else:   
+            else:
                 request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
                 request_search_recipe_json=request_search_recipe.json()
                 ids = []
@@ -151,9 +155,15 @@ class BreakfastPage(tk.Canvas):
                     file_name_input_breakfast.close()
                     master.switch_frame(IngredientsPageBreakfast)
                     return
-     
-            select_button = tk.Button(text = "Select", bg = "#ccd1d9", fg = "#000", command=select)
-            select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.755)
+
+            if my_listbox.get(0) == "":
+                no_recipe_found_label = tk.Label(self, text = "No Recipes Found", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
+                no_recipe_found_label.place(relx = 0.3, rely = 0.7)
+            else:
+                cover_previous_label = tk.Label(self, text = "                          ", bg = "#8953f6", fg = '#000', font = ('Roboto', 10), padx = 10, pady = 15)
+                cover_previous_label.place(relx = 0.3, rely = 0.7)
+                select_button = tk.Button(text = "Select", bg = "#ccd1d9", fg = "#000", command=select)
+                select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.755)
 
         enter_recipe_button = tk.Button(suggestion_1, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
         enter_recipe_button.place(relwidth = 0.2, relheight = 0.1, relx = 0.7, rely = 0.25)
@@ -211,10 +221,10 @@ class LunchPage(tk.Canvas):
             #search recipe and add it to list box
             food = entry_1.get()
             if food == '':
-                no_recipe_label = tk.Label(self, text = "Please Input a Recipe", bg = "#fff", fg = '#000', font = ('Roboto', 10), padx = 10, pady = 15)
-                no_recipe_label.place(relx = 0.1, rely = 0.8)
+                no_recipe_entered_label = tk.Label(self, text = "No Recipes Found", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
+                no_recipe_entered_label.place(relx = 0.3, rely = 0.7)
                 
-            else:   
+            else:
                 request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
                 request_search_recipe_json=request_search_recipe.json()
                 ids = []
@@ -246,8 +256,14 @@ class LunchPage(tk.Canvas):
                     master.switch_frame(IngredientsPageLunch)
                     return
      
-            select_button = tk.Button(text = "Select", bg = "#ccd1d9", fg = "#000", command=select)
-            select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.755)
+            if my_listbox.get(0) == "":
+                no_recipe_found_label = tk.Label(self, text = "No Recipes Found", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
+                no_recipe_found_label.place(relx = 0.3, rely = 0.7)
+            else:
+                cover_previous_label = tk.Label(self, text = "                          ", bg = "#8953f6", fg = '#000', font = ('Roboto', 10), padx = 10, pady = 15)
+                cover_previous_label.place(relx = 0.3, rely = 0.7)
+                select_button = tk.Button(text = "Select", bg = "#ccd1d9", fg = "#000", command=select)
+                select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.755)
 
         enter_button = tk.Button(suggestion_1, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
         enter_button.place(relwidth = 0.2, relheight = 0.1, relx = 0.7, rely = 0.25)
@@ -308,10 +324,10 @@ class DinnerPage(tk.Canvas):
             #search recipe and add it to list box
             food = entry_1.get()
             if food == '':
-                no_recipe_label = tk.Label(self, text = "Please Input a Recipe", bg = "#fff", fg = '#000', font = ('Roboto', 10), padx = 10, pady = 15)
-                no_recipe_label.place(relx = 0.1, rely = 0.8)
+                no_recipe_entered_label = tk.Label(self, text = "No Recipes Found", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
+                no_recipe_entered_label.place(relx = 0.3, rely = 0.7)
                 
-            else:   
+            else:
                 request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
                 request_search_recipe_json=request_search_recipe.json()
                 ids = []
@@ -321,7 +337,6 @@ class DinnerPage(tk.Canvas):
                     my_listbox.insert(END, (i['title']))
                     ids.append(i['id'])
                     names.append(i['title'])
-
 
             def select():
 
@@ -343,8 +358,14 @@ class DinnerPage(tk.Canvas):
                     master.switch_frame(IngredientsPageDinner)
                     return
      
-            select_button = tk.Button(text = "Select", bg = "#ccd1d9", fg = "#000", command=select)
-            select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.755)
+            if my_listbox.get(0) == "":
+                no_recipe_found_label = tk.Label(self, text = "No Recipes Found", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
+                no_recipe_found_label.place(relx = 0.3, rely = 0.7)
+            else:
+                cover_previous_label = tk.Label(self, text = "                          ", bg = "#8953f6", fg = '#000', font = ('Roboto', 10), padx = 10, pady = 15)
+                cover_previous_label.place(relx = 0.3, rely = 0.7)
+                select_button = tk.Button(text = "Select", bg = "#ccd1d9", fg = "#000", command=select)
+                select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.755)
 
         enter_button = tk.Button(suggestion_1, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
         enter_button.place(relwidth = 0.2, relheight = 0.1, relx = 0.7, rely = 0.25)
