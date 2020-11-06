@@ -23,6 +23,12 @@ import os
 #api_key = ('?apiKey=9172aaf2bf104daa84d9e09f6f54a3ed')
 api_key = ('?apiKey=83e419f9ed354ccc86b57c36f95c7811')
 
+'''
+!!! Important !!!
+Mr. Seidel, if the program breaks while you are using it,
+it is a result of the API key expiring. If this happens, 
+please comment out the API key above and uncomment the one directly below it.
+'''
 
 recipe_id_list = [' ']
 total_calories_list = [' ']
@@ -210,7 +216,7 @@ class BreakfastPage(tk.Canvas):
                   
             if food == '':
                 no_recipe_entered_label = tk.Label(self, text = "No Recipes Found", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
-                no_recipe_entered_label.place(relx = 0.3, rely = 0.7)
+                no_recipe_entered_label.place(relx = 0.3, rely = 0.75)
                 
             else:
                 request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
@@ -350,7 +356,7 @@ class LunchPage(tk.Canvas):
             food = entry_1.get()
             if food == '':
                 no_recipe_entered_label = tk.Label(self, text = "No Recipes Found", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
-                no_recipe_entered_label.place(relx = 0.3, rely = 0.7)
+                no_recipe_entered_label.place(relx = 0.3, rely = 0.75)
                 
             else:
                 request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
@@ -358,7 +364,6 @@ class LunchPage(tk.Canvas):
                 ids = []
                 names = []
                 for i in request_search_recipe_json['results']:
-                    position = 0
                     my_listbox.insert(END, (i['title']))
                     ids.append(i['id'])
                     names.append(i['title'])
@@ -491,7 +496,7 @@ class DinnerPage(tk.Canvas):
             food = entry_1.get()
             if food == '':
                 no_recipe_entered_label = tk.Label(self, text = "No Recipes Found", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
-                no_recipe_entered_label.place(relx = 0.3, rely = 0.7)
+                no_recipe_entered_label.place(relx = 0.3, rely = 0.75)
                 
             else:
                 request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
@@ -499,7 +504,6 @@ class DinnerPage(tk.Canvas):
                 ids = []
                 names = []
                 for i in request_search_recipe_json['results']:
-                    position = 0
                     my_listbox.insert(END, (i['title']))
                     ids.append(i['id'])
                     names.append(i['title'])
@@ -551,12 +555,16 @@ class IngredientsPageBreakfast(tk.Canvas):
         Backdrop against which all frames are loaded.
     tk.Label 
         Contains the text "Zero Food Waste"
+    ----------------------------------------------------
     file_id_input_breakfast : txt
         Appends data in relation to user's breakfast ids.
     file_id_info_breakfast : txt
         Writes data in relation to user's breakfast ids.
     file_id_output_breakfast : txt
         Reads data in relation to user's breakfast ids.
+    selected_recipe_id_breakfast : str
+        It is the ID of the meal selected.
+    ----------------------------------------------------
     file_cal_input_breakfast : txt
         Appends user calory input data.
     file_cal_info_breakfast : txt
@@ -565,11 +573,26 @@ class IngredientsPageBreakfast(tk.Canvas):
         Reads user calory input data.
     total_calories_breakfast : float
         User's total caloric intake in terms of breakfast.
+    ----------------------------------------------------
     file_name_input_breakfast : txt
         Appends the name of the user's breakfast selection.
-    file_name_output_breakfast : txt
     file_name_info_breakfast : txt
-
+        Writes the name of user's breakfast selection.
+    file_name_output_breakfast : txt
+        Read the name of user's breakfast selection.
+    ----------------------------------------------------
+    ingredients_label : tk.Button
+        Directs user to ingredients page.
+    instructions_label : tk.Button
+        Directs user to instructions page.
+    suggestion_1 : tk.Frame
+        Contains listbox that outputs ingredients + instructions.
+    my_listbox : tk.Listbox
+        Contains all ingredients info
+    my_scrollbarx : tk.Scrollbar
+        Allows user to scroll horizontally through ingredients info.
+    my_scrollbarx : tk.Scrollbar
+        Allows user to scroll vertically through ingredients info.
     '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
@@ -684,13 +707,47 @@ class InstructionsPageBreakfast(tk.Canvas):
     Attributes
     ----------
     tk.Canvas
-        This is backdrop against which all visible frames will be loaded.
-    tk.Label
-
-
-    Methods
-    -------
-    switch_frame()
+        Backdrop against which all frames are loaded.
+    tk.Label 
+        Contains the text "Zero Food Waste"
+    ----------------------------------------------------
+    file_id_input_breakfast : txt
+        Appends data in relation to user's breakfast ids.
+    file_id_info_breakfast : txt
+        Writes data in relation to user's breakfast ids.
+    file_id_output_breakfast : txt
+        Reads data in relation to user's breakfast ids.
+    selected_recipe_id_breakfast : str
+        It is the ID of the meal selected.
+    ----------------------------------------------------
+    file_cal_input_breakfast : txt
+        Appends user calory input data.
+    file_cal_info_breakfast : txt
+        Writes user calory input data.
+    file_cal_output_breakfast : txt
+        Reads user calory input data.
+    total_calories_breakfast : float
+        User's total caloric intake in terms of breakfast.
+    ----------------------------------------------------
+    file_name_input_breakfast : txt
+        Appends the name of the user's breakfast selection.
+    file_name_info_breakfast : txt
+        Writes the name of user's breakfast selection.
+    file_name_output_breakfast : txt
+        Read the name of user's breakfast selection.
+    ----------------------------------------------------
+    ingredients_label : tk.Button
+        Directs user to ingredients page.
+    instructions_label : tk.Button
+        Directs user to instructions page.
+    suggestion_1 : tk.Frame
+        Contains listbox that outputs ingredients + instructions.
+    my_listbox : tk.Listbox
+        Contains all ingredients info
+    my_scrollbarx : tk.Scrollbar
+        Allows user to scroll horizontally through instructions info.
+    my_scrollbarx : tk.Scrollbar
+        Allows user to scroll vertically through instructions info.
     '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
@@ -805,12 +862,16 @@ class IngredientsPageLunch(tk.Canvas):
         Backdrop against which all frames are loaded.
     tk.Label 
         Contains the text "Zero Food Waste"
+    ----------------------------------------------------
     file_id_input_breakfast : txt
         Appends data in relation to user's breakfast ids.
     file_id_info_breakfast : txt
         Writes data in relation to user's breakfast ids.
     file_id_output_breakfast : txt
         Reads data in relation to user's breakfast ids.
+    selected_recipe_id_breakfast : str
+        It is the ID of the meal selected.
+    ----------------------------------------------------
     file_cal_input_breakfast : txt
         Appends user calory input data.
     file_cal_info_breakfast : txt
@@ -819,11 +880,26 @@ class IngredientsPageLunch(tk.Canvas):
         Reads user calory input data.
     total_calories_breakfast : float
         User's total caloric intake in terms of breakfast.
+    ----------------------------------------------------
     file_name_input_breakfast : txt
         Appends the name of the user's breakfast selection.
-    file_name_output_breakfast : txt
     file_name_info_breakfast : txt
-
+        Writes the name of user's breakfast selection.
+    file_name_output_breakfast : txt
+        Read the name of user's breakfast selection.
+    ----------------------------------------------------
+    ingredients_label : tk.Button
+        Directs user to ingredients page.
+    instructions_label : tk.Button
+        Directs user to instructions page.
+    suggestion_1 : tk.Frame
+        Contains listbox that outputs ingredients + instructions.
+    my_listbox : tk.Listbox
+        Contains all ingredients info
+    my_scrollbarx : tk.Scrollbar
+        Allows user to scroll horizontally through ingredients info.
+    my_scrollbarx : tk.Scrollbar
+        Allows user to scroll vertically through ingredients info.
     '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
@@ -939,13 +1015,47 @@ class InstructionsPageLunch(tk.Canvas):
     Attributes
     ----------
     tk.Canvas
-        This is backdrop against which all visible frames will be loaded.
-    tk.Label
-
-
-    Methods
-    -------
-    switch_frame()
+        Backdrop against which all frames are loaded.
+    tk.Label 
+        Contains the text "Zero Food Waste"
+    ----------------------------------------------------
+    file_id_input_lunch : txt
+        Appends data in relation to user's lunch ids.
+    file_id_info_lunch : txt
+        Writes data in relation to user's lunch ids.
+    file_id_output_lunch : txt
+        Reads data in relation to user's lunch ids.
+    selected_recipe_id_lunch : str
+        It is the ID of the meal selected.
+    ----------------------------------------------------
+    file_cal_input_lunch : txt
+        Appends user calory input data.
+    file_cal_info_lunch : txt
+        Writes user calory input data.
+    file_cal_output_lunch : txt
+        Reads user calory input data.
+    total_calories_lunch : float
+        User's total caloric intake in terms of lunch.
+    ----------------------------------------------------
+    file_name_input_lunch : txt
+        Appends the name of the user's lunch selection.
+    file_name_info_lunch : txt
+        Writes the name of user's lunch selection.
+    file_name_output_lunch : txt
+        Read the name of user's lunch selection.
+    ----------------------------------------------------
+    ingredients_label : tk.Button
+        Directs user to ingredients page.
+    instructions_label : tk.Button
+        Directs user to instructions page.
+    suggestion_1 : tk.Frame
+        Contains listbox that outputs ingredients + instructions.
+    my_listbox : tk.Listbox
+        Contains all ingredients info
+    my_scrollbarx : tk.Scrollbar
+        Allows user to scroll horizontally through instructions info.
+    my_scrollbarx : tk.Scrollbar
+        Allows user to scroll vertically through instructions info.
     '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
@@ -1060,25 +1170,44 @@ class IngredientsPageDinner(tk.Canvas):
         Backdrop against which all frames are loaded.
     tk.Label 
         Contains the text "Zero Food Waste"
-    file_id_input_breakfast : txt
-        Appends data in relation to user's breakfast ids.
-    file_id_info_breakfast : txt
-        Writes data in relation to user's breakfast ids.
-    file_id_output_breakfast : txt
-        Reads data in relation to user's breakfast ids.
-    file_cal_input_breakfast : txt
+    ----------------------------------------------------
+    file_id_input_dinner : txt
+        Appends data in relation to user's dinner ids.
+    file_id_info_dinner : txt
+        Writes data in relation to user's dinner ids.
+    file_id_output_dinner : txt
+        Reads data in relation to user's dinner ids.
+    selected_recipe_id_dinner : str
+        It is the ID of the meal selected.
+    ----------------------------------------------------
+    file_cal_input_dinner : txt
         Appends user calory input data.
-    file_cal_info_breakfast : txt
+    file_cal_info_dinner : txt
         Writes user calory input data.
-    file_cal_output_breakfast : txt
+    file_cal_output_dinner : txt
         Reads user calory input data.
-    total_calories_breakfast : float
-        User's total caloric intake in terms of breakfast.
-    file_name_input_breakfast : txt
-        Appends the name of the user's breakfast selection.
-    file_name_output_breakfast : txt
-    file_name_info_breakfast : txt
-
+    total_calories_dinner : float
+        User's total caloric intake in terms of dinner.
+    ----------------------------------------------------
+    file_name_input_dinner : txt
+        Appends the name of the user's dinner selection.
+    file_name_info_dinner : txt
+        Writes the name of user's dinner selection.
+    file_name_output_dinner : txt
+        Read the name of user's dinner selection.
+    ----------------------------------------------------
+    ingredients_label : tk.Button
+        Directs user to ingredients page.
+    instructions_label : tk.Button
+        Directs user to instructions page.
+    suggestion_1 : tk.Frame
+        Contains listbox that outputs ingredients + instructions.
+    my_listbox : tk.Listbox
+        Contains all ingredients info
+    my_scrollbarx : tk.Scrollbar
+        Allows user to scroll horizontally through ingredients info.
+    my_scrollbarx : tk.Scrollbar
+        Allows user to scroll vertically through ingredients info.
     '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
@@ -1193,13 +1322,47 @@ class InstructionsPageDinner(tk.Canvas):
     Attributes
     ----------
     tk.Canvas
-        This is backdrop against which all visible frames will be loaded.
-    tk.Label
-
-
-    Methods
-    -------
-    switch_frame()
+        Backdrop against which all frames are loaded.
+    tk.Label 
+        Contains the text "Zero Food Waste"
+    ----------------------------------------------------
+    file_id_input_dinner : txt
+        Appends data in relation to user's dinner ids.
+    file_id_info_dinner : txt
+        Writes data in relation to user's dinner ids.
+    file_id_output_dinner : txt
+        Reads data in relation to user's dinner ids.
+    selected_recipe_id_dinner : str
+        It is the ID of the meal selected.
+    ----------------------------------------------------
+    file_cal_input_dinner : txt
+        Appends user calory input data.
+    file_cal_info_dinner : txt
+        Writes user calory input data.
+    file_cal_output_dinner : txt
+        Reads user calory input data.
+    total_calories_dinner : float
+        User's total caloric intake in terms of dinner.
+    ----------------------------------------------------
+    file_name_input_dinner : txt
+        Appends the name of the user's dinner selection.
+    file_name_info_dinner : txt
+        Writes the name of user's dinner selection.
+    file_name_output_dinner : txt
+        Read the name of user's dinner selection.
+    ----------------------------------------------------
+    ingredients_label : tk.Button
+        Directs user to ingredients page.
+    instructions_label : tk.Button
+        Directs user to instructions page.
+    suggestion_1 : tk.Frame
+        Contains listbox that outputs ingredients + instructions.
+    my_listbox : tk.Listbox
+        Contains all ingredients info
+    my_scrollbarx : tk.Scrollbar
+        Allows user to scroll horizontally through instructions info.
+    my_scrollbarx : tk.Scrollbar
+        Allows user to scroll vertically through instructions info.
     '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
