@@ -206,7 +206,7 @@ class LunchPage(tk.Canvas):
         def search():
             try:
                 int(entry_total_calories.get())
-                file_cal_input_breakfast = open('cal_breakfast.txt', 'w')
+                file_cal_input_breakfast = open('cal_lunch.txt', 'w')
                 file_cal_input_breakfast.write(entry_total_calories.get())
                 file_cal_input_breakfast.close()
                 calorie_input_check = 'Valid'
@@ -313,7 +313,7 @@ class DinnerPage(tk.Canvas):
         def search():
             try:
                 int(entry_total_calories.get())
-                file_cal_input_breakfast = open('cal_breakfast.txt', 'w')
+                file_cal_input_breakfast = open('cal_dinner.txt', 'w')
                 file_cal_input_breakfast.write(entry_total_calories.get())
                 file_cal_input_breakfast.close()
                 calorie_input_check = 'Valid'
