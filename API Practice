@@ -1,6 +1,6 @@
 #repl link: https://repl.it/join/kaskuoyg-gayan_athukoral
 import requests
-api_key = ('?apiKey=782bba4ef5fd462d81b2102ebb96fe55')
+api_key = ('?apiKey=83e419f9ed354ccc86b57c36f95c7811')
 
 #search recipe
 food = str(input('what u wanna eat?: '))
@@ -44,24 +44,24 @@ for i in recipe_instructions_json:
 
 #get recipe nutrition calorie stuff
 
-recipe_nutrition = requests.get('https://api.spoonacular.com/recipes/1003464/nutritionWidget.json' + api_key)
+recipe_nutrition = requests.get('https://api.spoonacular.com/recipes/'+input_id+'/nutritionWidget.json' + api_key)
 
 recipe_nutrition_json = recipe_nutrition.json()
 calories = recipe_nutrition_json['calories']
 
-recipe_info = requests.get('https://api.spoonacular.com/recipes/1003464/information?apiKey=782bba4ef5fd462d81b2102ebb96fe55&includeNutrition=false')
+recipe_info = requests.get('https://api.spoonacular.com/recipes/'+input_id+'/information?apiKey=782bba4ef5fd462d81b2102ebb96fe55&includeNutrition=false')
 
-recipe_info_json = recipe_info.json()
-servings = recipe_info_json['servings']
+#recipe_info_json = recipe_info.json()
+#servings = recipe_info_json['servings']
 
 total_calories = input(str('how many cal u eat: '))
 
 calorie_adjustment_ratio = float(total_calories)/float(calories)
-adjusted_servings= round(float(total_calories)*(float(servings)/float(calories)),0)
-print('This will create about ' + str(adjusted_servings) + ' serving(s) from this meal')
+adjusted_servings= round(float(total_calories)/float(calories))
+#print('This will create about ' + str(adjusted_servings) + ' serving(s) from this meal')
 print('')
 #adjust amount of ingredient to match desired calorie size
-ingredients_info = requests.get('https://api.spoonacular.com/recipes/1003464/ingredientWidget.json'+api_key)
+ingredients_info = requests.get('https://api.spoonacular.com/recipes/'+input_id+'/ingredientWidget.json'+api_key)
 
 ingredients_info_json = ingredients_info.json()
 #print(ingredients_info_json)
@@ -69,11 +69,8 @@ for i in ingredients_info_json['ingredients']:
   print(i['name'])
   (i['amount']).popitem()
   for j in ((i['amount']).values()):
-    print(j['value'])
+    #print(j['value'])
     adjusted_value = (j['value'])*calorie_adjustment_ratio
     round(adjusted_value,2)
     print(str(adjusted_value) + ' ' + str(j['unit']))
     print('')
-
-
-
