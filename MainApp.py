@@ -9,8 +9,8 @@ import os
 #api_key = ('?apiKey=782bba4ef5fd462d81b2102ebb96fe55')
 #api_key = ('?apiKey=76865ec43abf4ed8b775b956dd6dfaf5')
 #api_key = ('?apiKey=b2851b4e879e4d24800357e02da17645')
-api_key = ('?apiKey=9172aaf2bf104daa84d9e09f6f54a3ed')
-#api_key = ('?apiKey=83e419f9ed354ccc86b57c36f95c7811')
+#api_key = ('?apiKey=9172aaf2bf104daa84d9e09f6f54a3ed')
+api_key = ('?apiKey=83e419f9ed354ccc86b57c36f95c7811')
 
 
 recipe_id_list = [' ']
@@ -134,7 +134,8 @@ class BreakfastPage(tk.Canvas):
                 ids = []
                 names = []
                 for i in request_search_recipe_json['results']:
-                    position = 0
+                    print(i['title'])
+                    print(' ')
                     my_listbox.insert(END, (i['title']))
                     ids.append(i['id'])
                     names.append(i['title'])
@@ -162,10 +163,12 @@ class BreakfastPage(tk.Canvas):
 
             if my_listbox.get(0) == "" or calorie_input_check == 'Invalid':
                 no_recipe_found_label = tk.Label(self, text = "Invalid Input for Calories or Recipe", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
-                no_recipe_found_label.place(relx = 0.2, rely = 0.7)
+                no_recipe_found_label.place(relx = 0.2, rely = 0.75)
+                cover_select_button = tk.Label(text = "Select", bg = "#8953f6", fg = "#8953f6")
+                cover_select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.7)
             else:
                 cover_previous_label = tk.Label(self, text = "Invalid Input for Calories or Recipe", bg = "#8953f6", fg = '#8953f6', font = ('Roboto', 10, 'bold'), padx = 20, pady = 15)
-                cover_previous_label.place(relx = 0.2, rely = 0.7)
+                cover_previous_label.place(relx = 0.2, rely = 0.75)
                 select_button = tk.Button(text = "Select", bg = "#ccd1d9", fg = "#000", command=select)
                 select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.7)
 
@@ -266,10 +269,12 @@ class LunchPage(tk.Canvas):
      
             if my_listbox.get(0) == "" or calorie_input_check == 'Invalid':
                 no_recipe_found_label = tk.Label(self, text = "Invalid Input for Calories or Recipe", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
-                no_recipe_found_label.place(relx = 0.2, rely = 0.7)
+                no_recipe_found_label.place(relx = 0.2, rely = 0.75)
+                cover_select_button = tk.Label(text = "Select", bg = "#8953f6", fg = "#8953f6")
+                cover_select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.7)
             else:
                 cover_previous_label = tk.Label(self, text = "Invalid Input for Calories or Recipe", bg = "#8953f6", fg = '#8953f6', font = ('Roboto', 10, 'bold'), padx = 20, pady = 15)
-                cover_previous_label.place(relx = 0.2, rely = 0.7)
+                cover_previous_label.place(relx = 0.2, rely = 0.75)
                 select_button = tk.Button(text = "Select", bg = "#ccd1d9", fg = "#000", command=select)
                 select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.7)
                 
@@ -371,10 +376,12 @@ class DinnerPage(tk.Canvas):
                 
             if my_listbox.get(0) == "" or calorie_input_check == 'Invalid':
                 no_recipe_found_label = tk.Label(self, text = "Invalid Input for Calories or Recipe", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
-                no_recipe_found_label.place(relx = 0.2, rely = 0.7)
+                no_recipe_found_label.place(relx = 0.2, rely = 0.75)
+                cover_select_button = tk.Label(text = "Select", bg = "#8953f6", fg = "#8953f6")
+                cover_select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.7)
             else:
                 cover_previous_label = tk.Label(self, text = "Invalid Input for Calories or Recipe", bg = "#8953f6", fg = '#8953f6', font = ('Roboto', 10, 'bold'), padx = 20, pady = 15)
-                cover_previous_label.place(relx = 0.2, rely = 0.7)
+                cover_previous_label.place(relx = 0.2, rely = 0.75)
                 select_button = tk.Button(text = "Select", bg = "#ccd1d9", fg = "#000", command=select)
                 select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.7)
 
