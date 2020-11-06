@@ -40,7 +40,6 @@ recipe_name_list = [' ']
 class BaseWindow(tk.Tk):
     '''
     This is the root window on which every subsequent frame is loaded.
-
     Attributes
     ----------
     tk.Tk 
@@ -66,7 +65,6 @@ class BaseWindow(tk.Tk):
 class MainPage(tk.Canvas):
     '''
     This is the main window on which all the content is loaded.
-
     Attributes
     ----------
     tk.Canvas
@@ -126,7 +124,6 @@ class MainPage(tk.Canvas):
 class BreakfastPage(tk.Canvas):
     '''
     This is the main window on which all the content is loaded.
-
     Attributes
     ----------
     tk.Canvas
@@ -145,8 +142,6 @@ class BreakfastPage(tk.Canvas):
         Title placed directly above the Entry Box that takes user's food item input.
     entry_1 : tk.Entry
         Takes input of user's desired calories.
-
-
     Methods
     -------
     search() -> tk.Listbox, tk.Label, tk.Button
@@ -155,7 +150,6 @@ class BreakfastPage(tk.Canvas):
     select() -> tk.Button
         Found within the search() function; directs user to a page featuring the 
         ingredients and the instructions to make their desired meal.
-
     '''
     def __init__(self, suggestions):
 
@@ -224,8 +218,6 @@ class BreakfastPage(tk.Canvas):
                 ids = []
                 names = []
                 for i in request_search_recipe_json['results']:
-                    print(i['title'])
-                    print(' ')
                     my_listbox.insert(END, (i['title']))
                     ids.append(i['id'])
                     names.append(i['title'])
@@ -272,7 +264,6 @@ class BreakfastPage(tk.Canvas):
 class LunchPage(tk.Canvas):
     '''
     This is the main window on which all the content is loaded.
-
     Attributes
     ----------
     tk.Canvas
@@ -291,8 +282,6 @@ class LunchPage(tk.Canvas):
         Title placed directly above the Entry Box that takes user's food item input.
     entry_1 : tk.Entry
         Takes input of user's desired calories.
-
-
     Methods
     -------
     search() -> tk.Listbox, tk.Label, tk.Button
@@ -301,7 +290,6 @@ class LunchPage(tk.Canvas):
     select() -> tk.Button
         Found within the search() function; directs user to a page featuring the 
         ingredients and the instructions to make their desired meal.
-
     '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
@@ -409,7 +397,6 @@ class LunchPage(tk.Canvas):
 class DinnerPage(tk.Canvas):
     '''
     This is the main window on which all the content is loaded.
-
     Attributes
     ----------
     tk.Canvas
@@ -428,8 +415,6 @@ class DinnerPage(tk.Canvas):
         Title placed directly above the Entry Box that takes user's food item input.
     entry_1 : tk.Entry
         Takes input of user's desired calories.
-
-
     Methods
     -------
     search() -> tk.Listbox, tk.Label, tk.Button
@@ -438,7 +423,6 @@ class DinnerPage(tk.Canvas):
     select() -> tk.Button
         Found within the search() function; directs user to a page featuring the 
         ingredients and the instructions to make their desired meal.
-
     '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
@@ -548,7 +532,6 @@ class DinnerPage(tk.Canvas):
 class IngredientsPageBreakfast(tk.Canvas):
     '''
     This is the main window on which all the content is loaded.
-
     Attributes
     ----------
     tk.Canvas
@@ -703,7 +686,6 @@ class IngredientsPageBreakfast(tk.Canvas):
 class InstructionsPageBreakfast(tk.Canvas):
     '''
     This is the main window on which all the content is loaded.
-
     Attributes
     ----------
     tk.Canvas
@@ -855,7 +837,6 @@ class InstructionsPageBreakfast(tk.Canvas):
 class IngredientsPageLunch(tk.Canvas):
     '''
     This is the main window on which all the content is loaded.
-
     Attributes
     ----------
     tk.Canvas
@@ -1011,7 +992,6 @@ class IngredientsPageLunch(tk.Canvas):
 class InstructionsPageLunch(tk.Canvas):
     '''
     This is the main window on which all the content is loaded.
-
     Attributes
     ----------
     tk.Canvas
@@ -1163,7 +1143,6 @@ class InstructionsPageLunch(tk.Canvas):
 class IngredientsPageDinner(tk.Canvas):
     '''
     This is the main window on which all the content is loaded.
-
     Attributes
     ----------
     tk.Canvas
@@ -1318,7 +1297,6 @@ class IngredientsPageDinner(tk.Canvas):
 class InstructionsPageDinner(tk.Canvas):
     '''
     This is the main window on which all the content is loaded.
-
     Attributes
     ----------
     tk.Canvas
