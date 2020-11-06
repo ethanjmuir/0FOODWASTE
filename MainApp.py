@@ -1,3 +1,14 @@
+#   ---------------------------------------------------------------------------
+#   Name:       Zero Food Waste Program
+#   Purpose:    To ensure maximum efficiency in terms of food consumption within a household.
+#   
+#   References: This program uses the Spoonacular Recipes API.
+#				
+#   Author:     Gayan Athukorala, Ethan Muir.
+#   Created:    25-Sep-2020
+#   Updated:    6-Nov-2020
+#-----------------------------------------------------------------------------
+
 import requests
 import tkinter as tk
 import tkinter.font as tkFont
@@ -21,6 +32,19 @@ recipe_name_list = [' ']
 # --- Defining Button Functions START ---
 
 class BaseWindow(tk.Tk):
+    '''
+    This is the root window on which every subsequent frame is loaded.
+
+    Attributes
+    ----------
+    tk.Tk 
+        Serves as the root window itself.
+    
+    Methods
+    -------
+    switch_frame(frame_class) -> _frame
+        Destroys active frame, creates new frame in its place.
+    '''
     def __init__(self):
         tk.Tk.__init__(self)
         self._frame = None
@@ -34,6 +58,33 @@ class BaseWindow(tk.Tk):
         self._frame.pack()
 
 class MainPage(tk.Canvas):
+    '''
+    This is the main window on which all the content is loaded.
+
+    Attributes
+    ----------
+    tk.Canvas
+        This is backdrop against which all visible frames will be loaded.
+    tk.Label
+        Is the main title frame.
+    meal_label : tk.Label
+        Contains text "Your Meals for the Day", positioned above the three buttons.
+    frame_3 : tk.Button
+        Directs user to IngredientsPageBreakfast
+    breakfast_label : tk.Label
+        Placed in the left corner of frame_3
+    frame_4 : tk.Button
+        Directs user to IngredientsPageLunch
+    lunch_label : tk.Label
+        Placed in the left corner of frame_4
+    frame_5 : tk.Button
+        Directs user to IngredientsPageDinner
+    dinner_label : tk.Label
+        Placed in the left corner of frame_5
+    home_button : tk.Button
+        Leads user to home regardless of where they are in the program
+    '''
+
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
         tk.Canvas(self, height=896, width=414, bg="#fff").pack()
@@ -67,6 +118,39 @@ class MainPage(tk.Canvas):
         # ------------------------
 
 class BreakfastPage(tk.Canvas):
+    '''
+    This is the main window on which all the content is loaded.
+
+    Attributes
+    ----------
+    tk.Canvas
+        Backdrop against which all frames are loaded.
+    tk.Label 
+        Contains the text "Zero Food Waste"
+    profile_label : tk.Label
+        Contains the text "Breakfast"
+    suggestion_1 : tk.Frame
+        Large purple frame containing majority of the interactive elements on the page, with the exception of the home button.
+    total_calories_label : tk.Label
+        Title placed directly above the Entry Box that takes user's calory input.
+    entry_total_calories : tk.Entry
+        Takes input of user's desired calories.
+    search_bar_label : tk.Label
+        Title placed directly above the Entry Box that takes user's food item input.
+    entry_1 : tk.Entry
+        Takes input of user's desired calories.
+
+
+    Methods
+    -------
+    search() -> tk.Listbox, tk.Label, tk.Button
+        Upon taking user's inputs, a listbox appears with the appropriate results. 
+        Uses error checking to identify whether user inputted the correct form of information; "select" button doesn't appear otherwise.
+    select() -> tk.Button
+        Found within the search() function; directs user to a page featuring the 
+        ingredients and the instructions to make their desired meal.
+
+    '''
     def __init__(self, suggestions):
 
         tk.Canvas.__init__(self, suggestions)
@@ -145,7 +229,7 @@ class BreakfastPage(tk.Canvas):
 
                 if my_listbox.curselection() == ():
                     no_recipe_selected_label = tk.Label(self, text = "Please Select a Recipe", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
-                    no_recipe_selected_label.place(relx = 0.3, rely = 0.7)
+                    no_recipe_selected_label.place(relx = 0.2, rely = 0.75)
                     
                 else:
                     x = my_listbox.curselection()
@@ -180,6 +264,39 @@ class BreakfastPage(tk.Canvas):
   
         
 class LunchPage(tk.Canvas):
+    '''
+    This is the main window on which all the content is loaded.
+
+    Attributes
+    ----------
+    tk.Canvas
+        Backdrop against which all frames are loaded.
+    tk.Label 
+        Contains the text "Zero Food Waste"
+    profile_label : tk.Label
+        Contains the text "Lunch"
+    suggestion_1 : tk.Frame
+        Large purple frame containing majority of the interactive elements on the page, with the exception of the home button.
+    total_calories_label : tk.Label
+        Title placed directly above the Entry Box that takes user's calory input.
+    entry_total_calories : tk.Entry
+        Takes input of user's desired calories.
+    search_bar_label : tk.Label
+        Title placed directly above the Entry Box that takes user's food item input.
+    entry_1 : tk.Entry
+        Takes input of user's desired calories.
+
+
+    Methods
+    -------
+    search() -> tk.Listbox, tk.Label, tk.Button
+        Upon taking user's inputs, a listbox appears with the appropriate results. 
+        Uses error checking to identify whether user inputted the correct form of information; "select" button doesn't appear otherwise.
+    select() -> tk.Button
+        Found within the search() function; directs user to a page featuring the 
+        ingredients and the instructions to make their desired meal.
+
+    '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
         tk.Canvas(self, height=896, width=414, bg="#fff").pack()
@@ -250,8 +367,8 @@ class LunchPage(tk.Canvas):
             def select():
 
                 if my_listbox.curselection() == ():
-                    no_recipe_selected_label = tk.Label(self, text = "Please Select a Recipe", bg = "#fff", fg = '#000', font = ('Roboto', 10), padx = 10, pady = 15)
-                    no_recipe_selected_label.place(relx = 0.1, rely = 0.7)
+                    no_recipe_selected_label = tk.Label(self, text = "Please Select a Recipe", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
+                    no_recipe_selected_label.place(relx = 0.2, rely = 0.75)
                     
                 else:
                     x = my_listbox.curselection()
@@ -285,6 +402,39 @@ class LunchPage(tk.Canvas):
         home_button.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
 
 class DinnerPage(tk.Canvas):
+    '''
+    This is the main window on which all the content is loaded.
+
+    Attributes
+    ----------
+    tk.Canvas
+        Backdrop against which all frames are loaded.
+    tk.Label 
+        Contains the text "Zero Food Waste"
+    profile_label : tk.Label
+        Contains the text "Dinner"
+    suggestion_1 : tk.Frame
+        Large purple frame containing majority of the interactive elements on the page, with the exception of the home button.
+    total_calories_label : tk.Label
+        Title placed directly above the Entry Box that takes user's calory input.
+    entry_total_calories : tk.Entry
+        Takes input of user's desired calories.
+    search_bar_label : tk.Label
+        Title placed directly above the Entry Box that takes user's food item input.
+    entry_1 : tk.Entry
+        Takes input of user's desired calories.
+
+
+    Methods
+    -------
+    search() -> tk.Listbox, tk.Label, tk.Button
+        Upon taking user's inputs, a listbox appears with the appropriate results. 
+        Uses error checking to identify whether user inputted the correct form of information; "select" button doesn't appear otherwise.
+    select() -> tk.Button
+        Found within the search() function; directs user to a page featuring the 
+        ingredients and the instructions to make their desired meal.
+
+    '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
         tk.Canvas(self, height=896, width=414, bg="#fff").pack()
@@ -357,8 +507,8 @@ class DinnerPage(tk.Canvas):
             def select():
 
                 if my_listbox.curselection() == ():
-                    no_recipe_selected_label = tk.Label(self, text = "Please Select a Recipe", bg = "#fff", fg = '#000', font = ('Roboto', 10), padx = 10, pady = 15)
-                    no_recipe_selected_label.place(relx = 0.1, rely = 0.7)
+                    no_recipe_selected_label = tk.Label(self, text = "Please Select a Recipe", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
+                    no_recipe_selected_label.place(relx = 0.2, rely = 0.75)
                     
                 else:
                     x = my_listbox.curselection()
@@ -392,6 +542,35 @@ class DinnerPage(tk.Canvas):
         button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
 
 class IngredientsPageBreakfast(tk.Canvas):
+    '''
+    This is the main window on which all the content is loaded.
+
+    Attributes
+    ----------
+    tk.Canvas
+        Backdrop against which all frames are loaded.
+    tk.Label 
+        Contains the text "Zero Food Waste"
+    file_id_input_breakfast : txt
+        Appends data in relation to user's breakfast ids.
+    file_id_info_breakfast : txt
+        Writes data in relation to user's breakfast ids.
+    file_id_output_breakfast : txt
+        Reads data in relation to user's breakfast ids.
+    file_cal_input_breakfast : txt
+        Appends user calory input data.
+    file_cal_info_breakfast : txt
+        Writes user calory input data.
+    file_cal_output_breakfast : txt
+        Reads user calory input data.
+    total_calories_breakfast : float
+        User's total caloric intake in terms of breakfast.
+    file_name_input_breakfast : txt
+        Appends the name of the user's breakfast selection.
+    file_name_output_breakfast : txt
+    file_name_info_breakfast : txt
+
+    '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
         tk.Canvas(self, height=896, width=414, bg="#fff").pack()
@@ -499,6 +678,20 @@ class IngredientsPageBreakfast(tk.Canvas):
         add_change_recipe.place(relwidth=0.4, relheight=0.05, relx = 0.3, rely = 0.8)
         
 class InstructionsPageBreakfast(tk.Canvas):
+    '''
+    This is the main window on which all the content is loaded.
+
+    Attributes
+    ----------
+    tk.Canvas
+        This is backdrop against which all visible frames will be loaded.
+    tk.Label
+
+
+    Methods
+    -------
+    switch_frame()
+    '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
         tk.Canvas(self, height=896, width=414, bg="#fff").pack()
@@ -603,6 +796,35 @@ class InstructionsPageBreakfast(tk.Canvas):
         add_change_recipe.place(relwidth=0.4, relheight=0.05, relx = 0.3, rely = 0.8)
 
 class IngredientsPageLunch(tk.Canvas):
+    '''
+    This is the main window on which all the content is loaded.
+
+    Attributes
+    ----------
+    tk.Canvas
+        Backdrop against which all frames are loaded.
+    tk.Label 
+        Contains the text "Zero Food Waste"
+    file_id_input_breakfast : txt
+        Appends data in relation to user's breakfast ids.
+    file_id_info_breakfast : txt
+        Writes data in relation to user's breakfast ids.
+    file_id_output_breakfast : txt
+        Reads data in relation to user's breakfast ids.
+    file_cal_input_breakfast : txt
+        Appends user calory input data.
+    file_cal_info_breakfast : txt
+        Writes user calory input data.
+    file_cal_output_breakfast : txt
+        Reads user calory input data.
+    total_calories_breakfast : float
+        User's total caloric intake in terms of breakfast.
+    file_name_input_breakfast : txt
+        Appends the name of the user's breakfast selection.
+    file_name_output_breakfast : txt
+    file_name_info_breakfast : txt
+
+    '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
         tk.Canvas(self, height=896, width=414, bg="#fff").pack()
@@ -711,6 +933,20 @@ class IngredientsPageLunch(tk.Canvas):
         add_change_recipe.place(relwidth=0.4, relheight=0.05, relx = 0.3, rely = 0.8)
         
 class InstructionsPageLunch(tk.Canvas):
+    '''
+    This is the main window on which all the content is loaded.
+
+    Attributes
+    ----------
+    tk.Canvas
+        This is backdrop against which all visible frames will be loaded.
+    tk.Label
+
+
+    Methods
+    -------
+    switch_frame()
+    '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
         tk.Canvas(self, height=896, width=414, bg="#fff").pack()
@@ -815,6 +1051,35 @@ class InstructionsPageLunch(tk.Canvas):
         add_change_recipe.place(relwidth=0.4, relheight=0.05, relx = 0.3, rely = 0.8)
 
 class IngredientsPageDinner(tk.Canvas):
+    '''
+    This is the main window on which all the content is loaded.
+
+    Attributes
+    ----------
+    tk.Canvas
+        Backdrop against which all frames are loaded.
+    tk.Label 
+        Contains the text "Zero Food Waste"
+    file_id_input_breakfast : txt
+        Appends data in relation to user's breakfast ids.
+    file_id_info_breakfast : txt
+        Writes data in relation to user's breakfast ids.
+    file_id_output_breakfast : txt
+        Reads data in relation to user's breakfast ids.
+    file_cal_input_breakfast : txt
+        Appends user calory input data.
+    file_cal_info_breakfast : txt
+        Writes user calory input data.
+    file_cal_output_breakfast : txt
+        Reads user calory input data.
+    total_calories_breakfast : float
+        User's total caloric intake in terms of breakfast.
+    file_name_input_breakfast : txt
+        Appends the name of the user's breakfast selection.
+    file_name_output_breakfast : txt
+    file_name_info_breakfast : txt
+
+    '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
         tk.Canvas(self, height=896, width=414, bg="#fff").pack()
@@ -922,6 +1187,20 @@ class IngredientsPageDinner(tk.Canvas):
         add_change_recipe.place(relwidth=0.4, relheight=0.05, relx = 0.3, rely = 0.8)
         
 class InstructionsPageDinner(tk.Canvas):
+    '''
+    This is the main window on which all the content is loaded.
+
+    Attributes
+    ----------
+    tk.Canvas
+        This is backdrop against which all visible frames will be loaded.
+    tk.Label
+
+
+    Methods
+    -------
+    switch_frame()
+    '''
     def __init__(self, suggestions):
         tk.Canvas.__init__(self, suggestions)
         tk.Canvas(self, height=896, width=414, bg="#fff").pack()
