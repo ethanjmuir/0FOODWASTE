@@ -1,7 +1,6 @@
 import requests
 import tkinter as tk
 import tkinter.font as tkFont
-#from tkinter import filedialog, Text, Frame
 from tkinter import *
 import os
 
@@ -91,7 +90,7 @@ class BreakfastPage(tk.Canvas):
         total_calories_label.place(relx = 0.05, rely = 0.05)
         
         entry_total_calories = tk.Entry(suggestion_1, bg = "#fff", fg = '#000')
-        entry_total_calories.place(relwidth = 0.6, relheight = 0.1, relx = 0.1, rely = 0.1)
+        entry_total_calories.place(relwidth = 0.6, relheight = 0.1, relx = 0.1, rely= 0.1)
 
         search_bar_label = tk.Label(suggestion_1, text = "Search Recipes", bg = "#8953f6", fg = '#fff', font = ('Roboto', 10, 'bold'), padx = 10, pady = 5)
         search_bar_label.place(relx = 0.05, rely = 0.2)
@@ -100,10 +99,15 @@ class BreakfastPage(tk.Canvas):
         entry_1.place(relwidth = 0.6, relheight = 0.1, relx = 0.1, rely = 0.25)
 
         def search():
-
-            file_cal_input_breakfast = open('cal_breakfast.txt', 'w')
-            file_cal_input_breakfast.write(entry_total_calories.get())
-            file_cal_input_breakfast.close()            
+            try:
+                int(entry_total_calories.get())
+                file_cal_input_breakfast = open('cal_breakfast.txt', 'w')
+                file_cal_input_breakfast.write(entry_total_calories.get())
+                file_cal_input_breakfast.close()
+                calorie_input_check = 'Valid'
+            except ValueError:
+                calorie_input_check = 'Invalid'
+                    
             #Create frame and scroll bar
             my_frame = Frame(suggestion_1)
             my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
@@ -139,8 +143,8 @@ class BreakfastPage(tk.Canvas):
             def select():
 
                 if my_listbox.curselection() == ():
-                    no_recipe_selected_label = tk.Label(self, text = "Please Select a Recipe", bg = "#fff", fg = '#000', font = ('Roboto', 10), padx = 10, pady = 15)
-                    no_recipe_selected_label.place(relx = 0.1, rely = 0.8)
+                    no_recipe_selected_label = tk.Label(self, text = "Please Select a Recipe", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
+                    no_recipe_selected_label.place(relx = 0.3, rely = 0.7)
                     
                 else:
                     x = my_listbox.curselection()
@@ -156,14 +160,14 @@ class BreakfastPage(tk.Canvas):
                     master.switch_frame(IngredientsPageBreakfast)
                     return
 
-            if my_listbox.get(0) == "":
-                no_recipe_found_label = tk.Label(self, text = "No Recipes Found", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
-                no_recipe_found_label.place(relx = 0.3, rely = 0.7)
+            if my_listbox.get(0) == "" or calorie_input_check == 'Invalid':
+                no_recipe_found_label = tk.Label(self, text = "Invalid Input for Calories or Recipe", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
+                no_recipe_found_label.place(relx = 0.2, rely = 0.7)
             else:
-                cover_previous_label = tk.Label(self, text = "                          ", bg = "#8953f6", fg = '#000', font = ('Roboto', 10), padx = 10, pady = 15)
-                cover_previous_label.place(relx = 0.3, rely = 0.7)
+                cover_previous_label = tk.Label(self, text = "Invalid Input for Calories or Recipe", bg = "#8953f6", fg = '#8953f6', font = ('Roboto', 10, 'bold'), padx = 20, pady = 15)
+                cover_previous_label.place(relx = 0.2, rely = 0.7)
                 select_button = tk.Button(text = "Select", bg = "#ccd1d9", fg = "#000", command=select)
-                select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.755)
+                select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.7)
 
         enter_recipe_button = tk.Button(suggestion_1, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
         enter_recipe_button.place(relwidth = 0.2, relheight = 0.1, relx = 0.7, rely = 0.25)
@@ -200,11 +204,15 @@ class LunchPage(tk.Canvas):
         entry_1.place(relwidth = 0.6, relheight = 0.1, relx = 0.1, rely = 0.25)
 
         def search():
-            #del total_calories_list[0]
-            #total_calories_list.append(entry_total_calories.get())
-            file_cal_input_lunch = open('cal_lunch.txt', 'w')
-            file_cal_input_lunch.write(entry_total_calories.get())
-            file_cal_input_lunch.close()            
+            try:
+                int(entry_total_calories.get())
+                file_cal_input_breakfast = open('cal_breakfast.txt', 'w')
+                file_cal_input_breakfast.write(entry_total_calories.get())
+                file_cal_input_breakfast.close()
+                calorie_input_check = 'Valid'
+            except ValueError:
+                calorie_input_check = 'Invalid'
+           
             #Create frame and scroll bar
             my_frame = Frame(suggestion_1)
             my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
@@ -240,7 +248,7 @@ class LunchPage(tk.Canvas):
 
                 if my_listbox.curselection() == ():
                     no_recipe_selected_label = tk.Label(self, text = "Please Select a Recipe", bg = "#fff", fg = '#000', font = ('Roboto', 10), padx = 10, pady = 15)
-                    no_recipe_selected_label.place(relx = 0.1, rely = 0.8)
+                    no_recipe_selected_label.place(relx = 0.1, rely = 0.7)
                     
                 else:
                     x = my_listbox.curselection()
@@ -256,15 +264,15 @@ class LunchPage(tk.Canvas):
                     master.switch_frame(IngredientsPageLunch)
                     return
      
-            if my_listbox.get(0) == "":
-                no_recipe_found_label = tk.Label(self, text = "No Recipes Found", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
-                no_recipe_found_label.place(relx = 0.3, rely = 0.7)
+            if my_listbox.get(0) == "" or calorie_input_check == 'Invalid':
+                no_recipe_found_label = tk.Label(self, text = "Invalid Input for Calories or Recipe", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
+                no_recipe_found_label.place(relx = 0.2, rely = 0.7)
             else:
-                cover_previous_label = tk.Label(self, text = "                          ", bg = "#8953f6", fg = '#000', font = ('Roboto', 10), padx = 10, pady = 15)
-                cover_previous_label.place(relx = 0.3, rely = 0.7)
+                cover_previous_label = tk.Label(self, text = "Invalid Input for Calories or Recipe", bg = "#8953f6", fg = '#8953f6', font = ('Roboto', 10, 'bold'), padx = 20, pady = 15)
+                cover_previous_label.place(relx = 0.2, rely = 0.7)
                 select_button = tk.Button(text = "Select", bg = "#ccd1d9", fg = "#000", command=select)
-                select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.755)
-
+                select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.7)
+                
         enter_button = tk.Button(suggestion_1, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
         enter_button.place(relwidth = 0.2, relheight = 0.1, relx = 0.7, rely = 0.25)
 
@@ -303,11 +311,14 @@ class DinnerPage(tk.Canvas):
         entry_1.place(relwidth = 0.6, relheight = 0.1, relx = 0.1, rely = 0.25)
 
         def search():
-            #del total_calories_list[0]
-            #total_calories_list.append(entry_total_calories.get())
-            file_cal_input_dinner = open('cal_dinner.txt', 'w')
-            file_cal_input_dinner.write(entry_total_calories.get())
-            file_cal_input_dinner.close()            
+            try:
+                int(entry_total_calories.get())
+                file_cal_input_breakfast = open('cal_breakfast.txt', 'w')
+                file_cal_input_breakfast.write(entry_total_calories.get())
+                file_cal_input_breakfast.close()
+                calorie_input_check = 'Valid'
+            except ValueError:
+                calorie_input_check = 'Invalid'
             #Create frame and scroll bar
             my_frame = Frame(suggestion_1)
             my_scrollbar = Scrollbar(my_frame, orient = VERTICAL)
@@ -342,7 +353,7 @@ class DinnerPage(tk.Canvas):
 
                 if my_listbox.curselection() == ():
                     no_recipe_selected_label = tk.Label(self, text = "Please Select a Recipe", bg = "#fff", fg = '#000', font = ('Roboto', 10), padx = 10, pady = 15)
-                    no_recipe_selected_label.place(relx = 0.1, rely = 0.8)
+                    no_recipe_selected_label.place(relx = 0.1, rely = 0.7)
                     
                 else:
                     x = my_listbox.curselection()
@@ -357,15 +368,15 @@ class DinnerPage(tk.Canvas):
                     file_name_input_dinner.close()
                     master.switch_frame(IngredientsPageDinner)
                     return
-     
-            if my_listbox.get(0) == "":
-                no_recipe_found_label = tk.Label(self, text = "No Recipes Found", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
-                no_recipe_found_label.place(relx = 0.3, rely = 0.7)
+                
+            if my_listbox.get(0) == "" or calorie_input_check == 'Invalid':
+                no_recipe_found_label = tk.Label(self, text = "Invalid Input for Calories or Recipe", bg = "#8953f6", fg = '#000', font = ('Roboto', 10, 'bold'), padx = 10, pady = 15)
+                no_recipe_found_label.place(relx = 0.2, rely = 0.7)
             else:
-                cover_previous_label = tk.Label(self, text = "                          ", bg = "#8953f6", fg = '#000', font = ('Roboto', 10), padx = 10, pady = 15)
-                cover_previous_label.place(relx = 0.3, rely = 0.7)
+                cover_previous_label = tk.Label(self, text = "Invalid Input for Calories or Recipe", bg = "#8953f6", fg = '#8953f6', font = ('Roboto', 10, 'bold'), padx = 20, pady = 15)
+                cover_previous_label.place(relx = 0.2, rely = 0.7)
                 select_button = tk.Button(text = "Select", bg = "#ccd1d9", fg = "#000", command=select)
-                select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.755)
+                select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.7)
 
         enter_button = tk.Button(suggestion_1, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
         enter_button.place(relwidth = 0.2, relheight = 0.1, relx = 0.7, rely = 0.25)
