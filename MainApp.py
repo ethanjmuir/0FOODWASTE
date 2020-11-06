@@ -13,6 +13,7 @@ api_key = ('?apiKey=76865ec43abf4ed8b775b956dd6dfaf5')
 api_key = ('?apiKey=b2851b4e879e4d24800357e02da17645')
 recipe_id_list = ['placeholder']
 total_calories_list = ['placeholder']
+recipe_name_list = ['placeholder']
 # --------- THE APP ---------
 
 # --- Defining Button Functions START ---
@@ -37,25 +38,11 @@ class MainPage(tk.Canvas):
         
         # --- Main Title ---
         tk.Label(self, text="Zero Food Waste", bg = "#fff", fg = '#000', font = ('Roboto', 30, 'bold'), padx = 15, pady = 20).place(relx = 0.05, rely = 0)
-        # ------------------
-        '''
-        # --- Profile START ---
-        profile_button = tk.Button(self, bg = "#000")
-        profile_button.place(relwidth = 0.3, relheight = 0.12, relx = 0.1, rely = 0.12)
-        profile_label = tk.Label(self, text = "Your Profile", bg = "#fff", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10)
-        profile_label.place(relx = 0.45, rely = 0.15)
-        # ---------------------
-        '''
+       
         # --- Meal Planner START ---
 
         meal_label = tk.Label(self, text = "Your Meals for the Day", bg = "#fff", fg = "#000", font = ('Roboto', 18, 'bold'), padx = 15, pady = 5)
         meal_label.place(relx = 0.05, rely = 0.12)
-
-        previous_button = tk.Button(self, text = "<", bg = "#000")
-        previous_button.place(relwidth = 0.075, relheight = 0.15, relx = 0, rely = 0.45)
-
-        next_button = tk.Button(self, text = ">", bg = "#000", command=lambda: master.switch_frame(IngredientsPage))
-        next_button.place(relwidth = 0.075, relheight = 0.15, relx = 0.925, rely = 0.45)
 
         frame_3 = tk.Button(self, bg = "#4953f6", command=lambda: master.switch_frame(BreakfastPage))
         frame_3.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.2)
@@ -71,20 +58,10 @@ class MainPage(tk.Canvas):
         frame_5.place(relwidth = 0.8, relheight = 0.15, relx = 0.1, rely = 0.7)
         dinner_label = tk.Label(self, text = "Dinner", bg = "#8953f3", fg = "#fff", font = ('Roboto', 18, 'bold'), padx = 15, pady = 5)
         dinner_label.place(relx = 0.1, rely = 0.72)
-        '''
-        button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
-        button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
-        separator = tk.Frame(self, bg = "#000")
-        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
-        '''
-        home_button = tk.Button(self, text = "Home", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(MainPage))
+       
+        home_button = tk.Button(self, text = "Home", bg = "#ccd1d9", fg = "#000", font = ('Roboto', 10, 'bold'), command=lambda: master.switch_frame(MainPage))
         home_button.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
-        '''
-        separator = tk.Frame(self, bg = "#000")
-        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
-        button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
-        button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
-        '''
+        
         # ------------------------
 
 class BreakfastPage(tk.Canvas):
@@ -100,13 +77,6 @@ class BreakfastPage(tk.Canvas):
         # SUGGESTIONS
 
         # --- Right-Most Scrollbar ---
-        '''
-        scrollbar = tk.Scrollbar(self, bg = "#fff").place(relwidth = 0.5, relheight = 1.0, relx = 0.95, rely = 0)
-        
-        
-        canvas.config(yscrollcommand = scrollbar.set)
-        scrollbar.config(command = canvas.yview)
-        '''
 
         profile_label = tk.Label(self, text = "Breakfast", bg = "#fff", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10)
         profile_label.place(relx = 0.05, rely = 0.1)
@@ -114,16 +84,16 @@ class BreakfastPage(tk.Canvas):
         suggestion_1 = tk.Frame(self, bg = "#8953f6")
         suggestion_1.place(relwidth = 0.8, relheight = 0.65, relx = 0.1, rely = 0.2)
 
-        total_calories_label = tk.Label(suggestion_1, text = "Total Calories For This Meal", bg = "#8953f6", fg = '#fff', font = ('Roboto', 10), padx = 10, pady = 5)
+        total_calories_label = tk.Label(suggestion_1, text = "Total Calories For This Meal", bg = "#8953f6", fg = '#fff', font = ('Roboto', 10, 'bold'), padx = 10, pady = 5)
         total_calories_label.place(relx = 0.05, rely = 0.05)
         
-        entry_total_calories = tk.Entry(suggestion_1, bg = "#f54c49")
+        entry_total_calories = tk.Entry(suggestion_1, bg = "#fff", fg = '#000')
         entry_total_calories.place(relwidth = 0.6, relheight = 0.1, relx = 0.1, rely = 0.1)
 
-        search_bar_label = tk.Label(suggestion_1, text = "Search Recipes", bg = "#8953f6", fg = '#fff', font = ('Roboto', 10), padx = 10, pady = 5)
+        search_bar_label = tk.Label(suggestion_1, text = "Search Recipes", bg = "#8953f6", fg = '#fff', font = ('Roboto', 10, 'bold'), padx = 10, pady = 5)
         search_bar_label.place(relx = 0.05, rely = 0.2)
 
-        entry_1 = tk.Entry(suggestion_1, bg = "#f54c49")
+        entry_1 = tk.Entry(suggestion_1, bg = "#fff", fg = '#000')
         entry_1.place(relwidth = 0.6, relheight = 0.1, relx = 0.1, rely = 0.25)
 
         def search():
@@ -153,11 +123,11 @@ class BreakfastPage(tk.Canvas):
                 request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
                 request_search_recipe_json=request_search_recipe.json()
                 ids = []
+                names = []
                 for i in request_search_recipe_json['results']:
-                    position = 0
                     my_listbox.insert(END, (i['title']))
                     ids.append(i['id'])
-
+                    names.append(i['title'])
 
             def select():
 
@@ -171,6 +141,9 @@ class BreakfastPage(tk.Canvas):
                     recipe_id = ids[n]
                     del recipe_id_list[0]
                     recipe_id_list.append(recipe_id)
+                    recipe_name = names[n]
+                    del recipe_name_list[0]
+                    recipe_name_list.append(recipe_name)
                     master.switch_frame(IngredientsPage)
                     return
      
@@ -179,21 +152,10 @@ class BreakfastPage(tk.Canvas):
 
         enter_recipe_button = tk.Button(suggestion_1, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
         enter_recipe_button.place(relwidth = 0.2, relheight = 0.1, relx = 0.7, rely = 0.25)
-           
-        '''
-        button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
-        button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
-        separator = tk.Frame(self, bg = "#000")
-        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
-        '''
-        home_button = tk.Button(self, text = "Home", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(MainPage))
+  
+        home_button = tk.Button(self, text = "Home", bg = "#ccd1d9", fg = "#000", font = ('Roboto', 10, 'bold'), command=lambda: master.switch_frame(MainPage))
         home_button.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
-        '''
-        separator = tk.Frame(self, bg = "#000")
-        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
-        button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
-        button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
-        '''
+  
         
 class LunchPage(tk.Canvas):
     def __init__(self, suggestions):
@@ -208,16 +170,16 @@ class LunchPage(tk.Canvas):
         suggestion_1 = tk.Frame(self, bg = "#8953f6")
         suggestion_1.place(relwidth = 0.8, relheight = 0.65, relx = 0.1, rely = 0.2)
 
-        total_calories_label = tk.Label(suggestion_1, text = "Total Calories For This Meal", bg = "#8953f6", fg = '#fff', font = ('Roboto', 10), padx = 10, pady = 5)
+        total_calories_label = tk.Label(suggestion_1, text = "Total Calories For This Meal", bg = "#8953f6", fg = '#fff', font = ('Roboto', 10, 'bold'), padx = 10, pady = 5)
         total_calories_label.place(relx = 0.05, rely = 0.05)
         
-        entry_total_calories = tk.Entry(suggestion_1, bg = "#f54c49")
+        entry_total_calories = tk.Entry(suggestion_1, bg = "#fff", fg = '#000')
         entry_total_calories.place(relwidth = 0.6, relheight = 0.1, relx = 0.1, rely = 0.1)
 
-        search_bar_label = tk.Label(suggestion_1, text = "Search Recipes", bg = "#8953f6", fg = '#fff', font = ('Roboto', 10), padx = 10, pady = 5)
+        search_bar_label = tk.Label(suggestion_1, text = "Search Recipes", bg = "#8953f6", fg = '#fff', font = ('Roboto', 10, 'bold'), padx = 10, pady = 5)
         search_bar_label.place(relx = 0.05, rely = 0.2)
 
-        entry_1 = tk.Entry(suggestion_1, bg = "#f54c49")
+        entry_1 = tk.Entry(suggestion_1, bg = "#fff", fg = '#000')
         entry_1.place(relwidth = 0.6, relheight = 0.1, relx = 0.1, rely = 0.25)
 
         def search():
@@ -247,10 +209,12 @@ class LunchPage(tk.Canvas):
                 request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
                 request_search_recipe_json=request_search_recipe.json()
                 ids = []
+                names = []
                 for i in request_search_recipe_json['results']:
                     position = 0
                     my_listbox.insert(END, (i['title']))
                     ids.append(i['id'])
+                    names.append(i['title'])
 
 
             def select():
@@ -265,6 +229,9 @@ class LunchPage(tk.Canvas):
                     recipe_id = ids[n]
                     del recipe_id_list[0]
                     recipe_id_list.append(recipe_id)
+                    recipe_name = names[n]
+                    del recipe_name_list[0]
+                    recipe_name_list.append(recipe_name)
                     master.switch_frame(IngredientsPage)
                     return
      
@@ -272,19 +239,10 @@ class LunchPage(tk.Canvas):
             select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.755)
 
         enter_button = tk.Button(suggestion_1, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
-        enter_button.place(relwidth = 0.2, relheight = 0.1, relx = 0.7, rely = 0.1)
-        '''
-        separator = tk.Frame(self, bg = "#000")
-        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
-        '''
-        home_button = tk.Button(self, text = "Home", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(MainPage))
+        enter_button.place(relwidth = 0.2, relheight = 0.1, relx = 0.7, rely = 0.25)
+
+        home_button = tk.Button(self, text = "Home", bg = "#ccd1d9", fg = "#000", font = ('Roboto', 10, 'bold'), command=lambda: master.switch_frame(MainPage))
         home_button.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
-        '''
-        separator = tk.Frame(self, bg = "#000")
-        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
-        button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
-        button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
-        '''
 
 class DinnerPage(tk.Canvas):
     def __init__(self, suggestions):
@@ -298,13 +256,6 @@ class DinnerPage(tk.Canvas):
         # SUGGESTIONS
 
         # --- Right-Most Scrollbar ---
-        '''
-        scrollbar = tk.Scrollbar(self, bg = "#fff").place(relwidth = 0.5, relheight = 1.0, relx = 0.95, rely = 0)
-        
-        
-        canvas.config(yscrollcommand = scrollbar.set)
-        scrollbar.config(command = canvas.yview)
-        '''
 
         profile_label = tk.Label(self, text = "Dinner", bg = "#fff", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10)
         profile_label.place(relx = 0.05, rely = 0.1)
@@ -312,16 +263,16 @@ class DinnerPage(tk.Canvas):
         suggestion_1 = tk.Frame(self, bg = "#8953f6")
         suggestion_1.place(relwidth = 0.8, relheight = 0.65, relx = 0.1, rely = 0.2)
 
-        total_calories_label = tk.Label(suggestion_1, text = "Total Calories For This Meal", bg = "#8953f6", fg = '#fff', font = ('Roboto', 10), padx = 10, pady = 5)
+        total_calories_label = tk.Label(suggestion_1, text = "Total Calories For This Meal", bg = "#8953f6", fg = '#fff', font = ('Roboto', 10, 'bold'), padx = 10, pady = 5)
         total_calories_label.place(relx = 0.05, rely = 0.05)
         
-        entry_total_calories = tk.Entry(suggestion_1, bg = "#f54c49")
+        entry_total_calories = tk.Entry(suggestion_1, bg = "#fff", fg = '#000')
         entry_total_calories.place(relwidth = 0.6, relheight = 0.1, relx = 0.1, rely = 0.1)
 
-        search_bar_label = tk.Label(suggestion_1, text = "Search Recipes", bg = "#8953f6", fg = '#fff', font = ('Roboto', 10), padx = 10, pady = 5)
+        search_bar_label = tk.Label(suggestion_1, text = "Search Recipes", bg = "#8953f6", fg = '#fff', font = ('Roboto', 10, 'bold'), padx = 10, pady = 5)
         search_bar_label.place(relx = 0.05, rely = 0.2)
 
-        entry_1 = tk.Entry(suggestion_1, bg = "#f54c49")
+        entry_1 = tk.Entry(suggestion_1, bg = "#fff", fg = '#000')
         entry_1.place(relwidth = 0.6, relheight = 0.1, relx = 0.1, rely = 0.25)
 
         def search():
@@ -351,10 +302,12 @@ class DinnerPage(tk.Canvas):
                 request_search_recipe = requests.get('https://api.spoonacular.com/recipes/complexSearch'+api_key+'&query='+food)
                 request_search_recipe_json=request_search_recipe.json()
                 ids = []
+                names = []
                 for i in request_search_recipe_json['results']:
                     position = 0
                     my_listbox.insert(END, (i['title']))
                     ids.append(i['id'])
+                    names.append(i['title'])
 
 
             def select():
@@ -369,6 +322,9 @@ class DinnerPage(tk.Canvas):
                     recipe_id = ids[n]
                     del recipe_id_list[0]
                     recipe_id_list.append(recipe_id)
+                    recipe_name = names[n]
+                    del recipe_name_list[0]
+                    recipe_name_list.append(recipe_name)
                     master.switch_frame(IngredientsPage)
                     return
      
@@ -376,21 +332,11 @@ class DinnerPage(tk.Canvas):
             select_button.place(relwidth = 0.2, relheight = 0.06, relx = 0.4, rely = 0.755)
 
         enter_button = tk.Button(suggestion_1, text = "Enter", bg = "#ccd1d9", fg = "#000", command=search)
-        enter_button.place(relwidth = 0.2, relheight = 0.1, relx = 0.7, rely = 0.1)
-        '''
-        button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
-        button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
-        separator = tk.Frame(self, bg = "#000")
-        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
-        '''
-        button_2 = tk.Button(self, text = "Home", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(MainPage))
+        enter_button.place(relwidth = 0.2, relheight = 0.1, relx = 0.7, rely = 0.25)
+        
+        button_2 = tk.Button(self, text = "Home", bg = "#ccd1d9", fg = "#000", font = ('Roboto', 10, 'bold'), command=lambda: master.switch_frame(MainPage))
         button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
-        '''
-        separator = tk.Frame(self, bg = "#000")
-        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
-        button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
-        button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
-        '''
+
 
 class IngredientsPage(tk.Canvas):
     def __init__(self, suggestions):
@@ -404,14 +350,19 @@ class IngredientsPage(tk.Canvas):
 
         # --- Right-Most Scrollbar ---
 
-        ingredients_label = tk.Button(self, text = "Ingredients", bg = "#f54c49", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10, command=lambda: master.switch_frame(IngredientsPage))
+        ingredients_label = tk.Button(self, text = "Ingredients", bg = "#f54c49", fg = '#000', font = ('Roboto', 20), padx = 15, pady = 10, command=lambda: master.switch_frame(IngredientsPage))
         ingredients_label.place(relwidth=0.4, relheight=0.1, relx = 0.1, rely = 0.1)
         
-        instructions_label = tk.Button(self, text = "Instructions", bg = "#8953f6", fg = '#000', font = ('Roboto', 25), padx = 15, pady = 10, command=lambda: master.switch_frame(InstructionsPage))
+        instructions_label = tk.Button(self, text = "Instructions", bg = "#8953f6", fg = '#000', font = ('Roboto', 20), padx = 15, pady = 10, command=lambda: master.switch_frame(InstructionsPage))
         instructions_label.place(relwidth=0.4, relheight=0.1, relx = 0.5, rely = 0.1)
 
         suggestion_1 = tk.Frame(self, bg = "#f54c49")
         suggestion_1.place(relwidth = 0.8, relheight = 0.6, relx = 0.1, rely = 0.2)
+
+        selected_recipe_name = recipe_name_list[0]
+        
+        recipe_name_label = tk.Label(suggestion_1, text = selected_recipe_name, bg = "#f54c49", fg = '#000', font = ('Roboto', 15), padx = 10, pady = 5)
+        recipe_name_label.place(relx = 0.05, rely = 0.025)        
 
         #Create frame and scroll bar
         my_frame = Frame(suggestion_1)
@@ -454,21 +405,8 @@ class IngredientsPage(tk.Canvas):
             my_listbox.insert(END, ingredient)
             my_listbox.insert(END, '')
             
-
-        '''
-        button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
-        button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
-        separator = tk.Frame(self, bg = "#000")
-        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
-        '''
-        button_2 = tk.Button(self, text = "Home", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(MainPage))
+        button_2 = tk.Button(self, text = "Home", bg = "#ccd1d9", fg = "#000", font = ('Roboto', 10, 'bold'), command=lambda: master.switch_frame(MainPage))
         button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
-        '''
-        separator = tk.Frame(self, bg = "#000")
-        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
-        button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
-        button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
-        '''
         
 class InstructionsPage(tk.Canvas):
     def __init__(self, suggestions):
@@ -490,6 +428,11 @@ class InstructionsPage(tk.Canvas):
 
         suggestion_1 = tk.Frame(self, bg = "#8953f6")
         suggestion_1.place(relwidth = 0.8, relheight = 0.6, relx = 0.1, rely = 0.2)
+
+        selected_recipe_name = recipe_name_list[0]
+        
+        recipe_name_label = tk.Label(suggestion_1, text = selected_recipe_name, bg = "#8953f6", fg = '#000', font = ('Roboto', 15), padx = 10, pady = 5)
+        recipe_name_label.place(relx = 0.05, rely = 0.025)  
 
                     
         #Create frame and scroll bar
@@ -532,20 +475,8 @@ class InstructionsPage(tk.Canvas):
             my_listbox.insert(END, 'Instructions: ' + n['step'])
             my_listbox.insert(END, ' ')
         
-        '''
-        button_1 = tk.Button(self, text = "Suggestions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(SuggestionsPage))
-        button_1.place(relwidth = 0.2, relheight = 0.05, relx = 0.1, rely = 0.9,)
-        separator = tk.Frame(self, bg = "#000")
-        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.35, rely = 0.9)
-        '''
-        button_2 = tk.Button(self, text = "Home", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(MainPage))
+        button_2 = tk.Button(self, text = "Home", bg = "#ccd1d9", fg = "#000", font = ('Roboto', 10, 'bold'), command=lambda: master.switch_frame(MainPage))
         button_2.place(relwidth = 0.2, relheight = 0.05, relx = 0.4, rely = 0.9)
-        '''
-        separator = tk.Frame(self, bg = "#000")
-        separator.place(relwidth = 0.005, relheight = 0.05, relx = 0.65, rely = 0.9)
-        button_3 = tk.Button(self, text = "Instructions", bg = "#ccd1d9", fg = "#000", command=lambda: master.switch_frame(InstructionsPage))
-        button_3.place(relwidth = 0.2, relheight = 0.05, relx = 0.7, rely = 0.9)
-        '''
 
 # --- Loop All Windows ---
 master = BaseWindow()
